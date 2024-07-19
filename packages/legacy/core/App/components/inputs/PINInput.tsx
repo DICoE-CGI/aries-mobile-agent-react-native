@@ -41,7 +41,7 @@ const PINInput: React.FC<PINInputProps & React.RefAttributes<TextInput>> = forwa
         justifyContent: 'flex-start',
         alignItems: 'flex-end',
         flexWrap: 'wrap',
-        minWidth: '100%',
+        width: '100%',
         flex: 1,
         marginBottom: 24,
       },
@@ -57,6 +57,7 @@ const PINInput: React.FC<PINInputProps & React.RefAttributes<TextInput>> = forwa
       },
       cell: {
         height: cellHeight,
+        width: '100%',
         paddingHorizontal: 2,
         backgroundColor: PINInputTheme.cell.backgroundColor,
       },
