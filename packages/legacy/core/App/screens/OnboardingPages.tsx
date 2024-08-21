@@ -99,7 +99,7 @@ const createImageDisplayOptions = (OnboardingTheme: any) => {
   }
 }
 
-const customPages = (onTutorialCompleted: GenericFn, OnboardingTheme: any) => {
+const CustomPages = (onTutorialCompleted: GenericFn, OnboardingTheme: any) => {
   const { t } = useTranslation()
   const styles = createStyles(OnboardingTheme)
   const imageDisplayOptions = createImageDisplayOptions(OnboardingTheme)
@@ -220,7 +220,7 @@ const OnboardingPages = (onTutorialCompleted: GenericFn, OnboardingTheme: any): 
         g.devModeListener ? incrementDeveloperMenuCounter : undefined
       )
     ),
-    customPages(onTutorialCompleted, OnboardingTheme),
+    CustomPages(onTutorialCompleted, OnboardingTheme),
   ]
 }
 
