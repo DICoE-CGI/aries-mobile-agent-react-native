@@ -323,7 +323,8 @@ const PINEnter: React.FC<PINEnterProps> = ({ setAuthenticated, usage = PINEntryU
             </>
           ) : biometricsErr ? (
             <>
-              <Text style={[TextTheme.normal, { alignSelf: 'center' }]}>{t('PINEnter.BiometricsError')}</Text>
+              {/* TODO: fix biometrics error falsely displaying */}
+              <Text style={[TextTheme.normal, { alignSelf: 'center', marginBottom: 16 }]}>{t('PINEnter.BiometricsError')}</Text>
               <Text style={[TextTheme.normal, { alignSelf: 'center', marginBottom: 16 }]}>
                 {t('PINEnter.BiometricsErrorEnterPIN')}
               </Text>
