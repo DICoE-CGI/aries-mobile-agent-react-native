@@ -52,7 +52,7 @@ export function createDefaultStackOptions({ ColorPallet }: ITheme): StackNavigat
 
   return (
     globalScreenOptions ?? {
-      headerTintColor: ColorPallet.brand.headerIcon,
+      headerTintColor: ColorPallet.brand.navigationIcon,
       headerShown: true,
       headerBackTitleVisible: false,
       headerTitleContainerStyle: {

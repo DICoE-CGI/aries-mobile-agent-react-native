@@ -38,7 +38,7 @@ const InfoTextBox: React.FC<TextBoxProps> = ({
     row: {
       flexDirection: iconHorizontalPosition === 'left' ? 'row' : 'row-reverse',
       alignItems: 'center',
-      justifyContent: 'left',
+      justifyContent: 'flex-start',
     },
     text: {
       ...TextTheme.bold,
