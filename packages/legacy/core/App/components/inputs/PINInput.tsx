@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import { hitSlop, minPINLength } from '../../constants'
 import { useTheme } from '../../contexts/theme'
 import { testIdWithKey } from '../../utils/testable'
+import { ImageBackgroundComponent } from 'react-native'
 
 interface PINInputProps {
   label?: string
@@ -79,8 +80,8 @@ const PINInput: React.FC<PINInputProps & React.RefAttributes<TextInput>> = forwa
 
     return (
       <View style={style.container}>
+        {label && <Text style={[TextTheme.label, { marginBottom: 8 }]}>{label}</Text>}
         <View style={style.labelAndFieldContainer}>
-          {label && <Text style={[TextTheme.label, { marginBottom: 8 }]}>{label}</Text>}
           <CodeField
             {...props}
             testID={testID}
@@ -109,7 +110,8 @@ const PINInput: React.FC<PINInputProps & React.RefAttributes<TextInput>> = forwa
             }}
             autoFocus={autoFocus}
             ref={ref}
-          />
+          >         
+          </CodeField>
         </View>
         <View style={style.hideIcon}>
           <TouchableOpacity
