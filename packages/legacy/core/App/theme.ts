@@ -115,6 +115,7 @@ export interface IBrandColors {
   icon: string
   headerText: string
   headerIcon: string
+  navigationIcon: string
   buttonText: string
   tabBarInactive: string
   unorderedList: string
@@ -207,6 +208,7 @@ const BrandColors: IBrandColors = {
   text: GrayscaleColors.black,
   icon: GrayscaleColors.black,
   headerIcon: GrayscaleColors.black,
+  navigationIcon: GrayscaleColors.white,
   headerText: GrayscaleColors.white,
   buttonText: GrayscaleColors.white,
   tabBarInactive: GrayscaleColors.mediumGrey,
@@ -583,7 +585,7 @@ export const TabTheme = {
     paddingBottom: 5,
   },
   tabBarButtonIconStyle: {
-    color: ColorPallet.brand.headerIcon,
+    color: ColorPallet.brand.navigationIcon,
   },
   focusTabIconStyle: {
     height: 60,
