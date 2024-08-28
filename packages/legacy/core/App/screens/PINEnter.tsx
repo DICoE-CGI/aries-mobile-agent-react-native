@@ -55,7 +55,9 @@ const PINEnter: React.FC<PINEnterProps> = ({ setAuthenticated, usage = PINEntryU
     },
 
     // below used as helpful labels for views, no properties needed atp
-    contentContainer: {},
+    contentContainer: {
+      maxWidth: '100%',
+    },
     controlsContainer: {},
 
     buttonContainer: {

@@ -47,17 +47,20 @@ const PINInput: React.FC<PINInputProps & React.RefAttributes<TextInput>> = forwa
       },
       labelAndFieldContainer: {
         flexGrow: 1,
+        width: '80%',
+        boxSizing: 'border-box',
       },
       codeFieldRoot: {
         borderRadius: 5,
         paddingHorizontal: 12,
         paddingVertical: 4,
         justifyContent: 'flex-start',
+        width: '100%',
         ...PINInputTheme.cell,
       },
       cell: {
         height: cellHeight,
-        width: '100%',
+        flex: 1,
         paddingHorizontal: 2,
         backgroundColor: PINInputTheme.cell.backgroundColor,
       },
@@ -69,8 +72,8 @@ const PINInput: React.FC<PINInputProps & React.RefAttributes<TextInput>> = forwa
       },
       hideIcon: {
         flexShrink: 1,
-        marginVertical: 10,
-        paddingHorizontal: 10,
+        alignSelf: 'center',
+        paddingLeft: 15,
       },
     })
 
