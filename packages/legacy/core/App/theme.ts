@@ -206,7 +206,7 @@ const BrandColors: IBrandColors = {
   link: GrayscaleColors.black,
   text: GrayscaleColors.black,
   icon: GrayscaleColors.black,
-  headerIcon: GrayscaleColors.white,
+  headerIcon: GrayscaleColors.black,
   headerText: GrayscaleColors.white,
   buttonText: GrayscaleColors.white,
   tabBarInactive: GrayscaleColors.mediumGrey,
