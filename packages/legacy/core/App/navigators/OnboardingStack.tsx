@@ -100,6 +100,7 @@ const OnboardingStack: React.FC = () => {
         return {
           ...ScreenOptionsDictionary[Screens.Onboarding],
           title: t('Screens.Onboarding'),
+          headerShown: false,
         }
       },
     },

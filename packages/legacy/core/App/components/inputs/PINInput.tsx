@@ -39,8 +39,6 @@ const PINInput: React.FC<PINInputProps & React.RefAttributes<TextInput>> = forwa
     const style = StyleSheet.create({
       container: {
         flexDirection: 'row',
-        justifyContent: 'flex-start',
-        alignItems: 'flex-end',
         flexWrap: 'wrap',
         width: '100%',
         flex: 1,
@@ -49,32 +47,31 @@ const PINInput: React.FC<PINInputProps & React.RefAttributes<TextInput>> = forwa
       labelAndFieldContainer: {
         flexGrow: 1,
         width: '80%',
-        boxSizing: 'border-box',
       },
       codeFieldRoot: {
-        borderRadius: 5,
-        paddingHorizontal: 12,
+        paddingRight: 5,
         paddingVertical: 4,
-        justifyContent: 'flex-start',
         width: '100%',
-        ...PINInputTheme.cell,
       },
       cell: {
         height: cellHeight,
         flex: 1,
         paddingHorizontal: 2,
+        borderRadius: 5,
+        marginRight: 5,
         backgroundColor: PINInputTheme.cell.backgroundColor,
       },
       cellText: {
-        ...TextTheme.headingThree,
+        fontSize: 26,
+        fontWeight: '200',
         color: PINInputTheme.cellText.color,
         textAlign: 'center',
+        textAlignVertical: 'center',
         lineHeight: cellHeight,
       },
       hideIcon: {
         flexShrink: 1,
         alignSelf: 'center',
-        paddingLeft: 15,
       },
     })
 
