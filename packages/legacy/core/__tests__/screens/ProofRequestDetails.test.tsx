@@ -1,5 +1,5 @@
 import mockRNCNetInfo from '@react-native-community/netinfo/jest/netinfo-mock'
-import { useNavigation } from '@react-navigation/core'
+import { useNavigation } from '@react-navigation/native'
 import { act, fireEvent, render } from '@testing-library/react-native'
 import React from 'react'
 
@@ -16,30 +16,18 @@ import { applyTemplateMarkers, useRemoteProofBundleResolver } from '../../App/ut
 jest.mock('../../App/container-api')
 jest.mock('react-native-permissions', () => require('react-native-permissions/mock'))
 jest.mock('@react-native-community/netinfo', () => mockRNCNetInfo)
-jest.mock('@react-navigation/core', () => {
-  return require('../../__mocks__/custom/@react-navigation/core')
-})
-jest.mock('@hyperledger/anoncreds-react-native', () => ({}))
-jest.mock('@hyperledger/aries-askar-react-native', () => ({}))
-jest.mock('@hyperledger/indy-vdr-react-native', () => ({}))
-jest.mock('react-native-fs', () => ({}))
-jest.mock('@react-navigation/native', () => {
-  return require('../../__mocks__/custom/@react-navigation/native')
-})
 jest.mock('react-native-vision-camera', () => {
   return require('../../__mocks__/custom/react-native-camera')
 })
 jest.mock('react-native-device-info', () => () => jest.fn())
-
-jest.useFakeTimers({ legacyFakeTimers: true })
-jest.spyOn(global, 'setTimeout')
-
 jest.mock('../../App/hooks/proof-request-templates', () => ({
   useTemplates: jest.fn(),
   useTemplate: jest.fn(),
 }))
-
 jest.mock('axios', () => ({ create: jest.fn() }))
+
+jest.useFakeTimers({ legacyFakeTimers: true })
+jest.spyOn(global, 'setTimeout')
 
 const templates = [
   {
@@ -80,7 +68,7 @@ axios.create.mockImplementation(() => ({ get: () => Promise.resolve({ data: temp
 // @ts-ignore
 useTemplates.mockImplementation(() => templates)
 // @ts-ignore
-useTemplate.mockImplementation((id) => templates[0])
+useTemplate.mockImplementation(() => templates[0])
 const templateId = templates[0].id
 const connectionId = 'test'
 const navigation = useNavigation()

@@ -1,6 +1,5 @@
 import { ConfigurationContext } from '../../App'
 import Record from '../../App/components/record/Record'
-import { useNotifications } from '../../App/hooks/notifications'
 import { Locales } from '../../App/localization'
 
 const configurationContext: ConfigurationContext = {
@@ -31,15 +30,6 @@ const configurationContext: ConfigurationContext = {
     },
     displayHelper: false,
   },
-  customNotification: {
-    component: () => null,
-    onCloseAction: () => null,
-    title: '',
-    description: '',
-    buttonTitle: '',
-    pageTitle: '',
-  },
-  useCustomNotifications: useNotifications,
   supportedLanguages: [Locales.en, Locales.fr, Locales.ptBr],
   whereToUseWalletUrl: 'https://example.com',
 }

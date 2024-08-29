@@ -1,4 +1,10 @@
-import { BaseLogger } from '@credo-ts/core'
+import {
+  Agent,
+  BaseLogger,
+  BasicMessageRecord,
+  ProofExchangeRecord,
+  CredentialExchangeRecord as CredentialRecord,
+} from '@credo-ts/core'
 import { IndyVdrPoolConfig } from '@credo-ts/indy-vdr'
 import { ProofRequestTemplate } from '@hyperledger/aries-bifold-verifier'
 import { OCABundleResolverType } from '@hyperledger/aries-oca/build/legacy'
@@ -8,9 +14,12 @@ import { DependencyContainer } from 'tsyringe'
 
 import { Button } from './components/buttons/Button-api'
 import { ReducerAction } from './contexts/reducers/store'
+import { IHistoryManager } from './modules/history'
 import Onboarding from './screens/Onboarding'
+import { AttestationMonitor } from './types/attestation'
 import { GenericFn } from './types/fn'
 import { AuthenticateStackParams, ScreenOptionsType } from './types/navigators'
+import { CustomNotification } from './types/notification'
 
 export type FN_ONBOARDING_DONE = (
   dispatch: React.Dispatch<ReducerAction<unknown>>,
@@ -34,12 +43,17 @@ export const SCREEN_TOKENS = {
   SCREEN_ONBOARDING_ITEM: 'screen.onboarding.item',
 } as const
 
+export const NOTIFICATION_TOKENS = {
+  NOTIFICATIONS: 'notification.list',
+} as const
+
 export const STACK_TOKENS = {
   STACK_ONBOARDING: 'stack.onboarding',
 } as const
 
 export const FN_TOKENS = {
   FN_ONBOARDING_DONE: 'fn.onboardingDone',
+  FN_LOAD_HISTORY: 'fn.loadHistory',
 } as const
 
 export const COMP_TOKENS = {
@@ -68,6 +82,7 @@ export const UTILITY_TOKENS = {
   UTIL_OCA_RESOLVER: 'utility.oca-resolver',
   UTIL_LEDGERS: 'utility.ledgers',
   UTIL_PROOF_TEMPLATE: 'utility.proof-template',
+  UTIL_ATTESTATION_MONITOR: 'utility.attestation-monitor',
 } as const
 
 export const TOKENS = {
@@ -75,6 +90,7 @@ export const TOKENS = {
   ...SCREEN_TOKENS,
   ...SERVICE_TOKENS,
   ...STACK_TOKENS,
+  ...NOTIFICATION_TOKENS,
   ...FN_TOKENS,
   ...COMP_TOKENS,
   ...LOAD_STATE_TOKENS,
@@ -82,6 +98,8 @@ export const TOKENS = {
   ...CACHE_TOKENS,
   ...UTILITY_TOKENS,
 } as const
+
+export type FN_HISTORY_MANAGER = (agent: Agent<any>) => IHistoryManager
 
 export type TokenMapping = {
   [TOKENS.CRED_HELP_ACTION_OVERRIDES]: {
@@ -98,6 +116,10 @@ export type TokenMapping = {
   [TOKENS.FN_ONBOARDING_DONE]: FN_ONBOARDING_DONE
   [TOKENS.LOAD_STATE]: LoadStateFn
   [TOKENS.COMP_BUTTON]: Button
+  [TOKENS.NOTIFICATIONS]: {
+    useNotifications: () => Array<BasicMessageRecord | CredentialRecord | ProofExchangeRecord | CustomNotification>
+    customNotificationConfig?: CustomNotification
+  }
   [TOKENS.OBJECT_ONBOARDING_CONFIG]: ScreenOptionsType
   [TOKENS.CACHE_CRED_DEFS]: { did: string; id: string }[]
   [TOKENS.CACHE_SCHEMAS]: { did: string; id: string }[]
@@ -105,11 +127,14 @@ export type TokenMapping = {
   [TOKENS.UTIL_OCA_RESOLVER]: OCABundleResolverType
   [TOKENS.UTIL_LEDGERS]: IndyVdrPoolConfig[]
   [TOKENS.UTIL_PROOF_TEMPLATE]: ProofRequestTemplateFn | undefined
+  [TOKENS.UTIL_ATTESTATION_MONITOR]: AttestationMonitor
+  [TOKENS.FN_LOAD_HISTORY]: FN_HISTORY_MANAGER
 }
 
 export interface Container {
   init(): Container
   resolve<K extends keyof TokenMapping>(token: K): TokenMapping[K]
+  resolveAll<K extends keyof TokenMapping, T extends K[]>(tokens: [...T]): { [I in keyof T]: TokenMapping[T[I]] }
   get container(): DependencyContainer
 }
 
@@ -119,3 +144,7 @@ export const ContainerProvider = ContainerContext.Provider
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
 export const useContainer = () => useContext(ContainerContext)!
+
+export const useServices = <K extends keyof TokenMapping, T extends K[]>(tokens: [...T]) => {
+  return useContainer().resolveAll(tokens)
+}

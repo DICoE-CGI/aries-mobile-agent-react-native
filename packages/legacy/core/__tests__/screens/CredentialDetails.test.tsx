@@ -1,7 +1,7 @@
 import { AnonCredsCredentialMetadataKey } from '@credo-ts/anoncreds'
 import { CredentialExchangeRecord, CredentialRole, CredentialState } from '@credo-ts/core'
 import { useCredentialById } from '@credo-ts/react-hooks'
-import { useNavigation } from '@react-navigation/core'
+import { useNavigation } from '@react-navigation/native'
 import { act, cleanup, fireEvent, render } from '@testing-library/react-native'
 import React from 'react'
 
@@ -48,12 +48,6 @@ const buildCredentialExchangeRecord = () => {
 }
 
 jest.mock('../../App/container-api')
-jest.mock('@react-navigation/core', () => {
-  return require('../../__mocks__/custom/@react-navigation/core')
-})
-jest.mock('@react-navigation/native', () => {
-  return require('../../__mocks__/custom/@react-navigation/native')
-})
 jest.mock('react-native-localize', () => {
   return require('../../__mocks__/custom/react-native-localize')
 })
@@ -83,6 +77,7 @@ describe('displays a credential details screen', () => {
   describe('with a credential list item (CardLayout aries/overlays/branding/0.1)', () => {
     const configurationContext_branding01 = {
       ...configurationContext,
+      // eslint-disable-next-line @typescript-eslint/no-var-requires
       OCABundleResolver: new DefaultOCABundleResolver(require('../../App/assets/oca-bundles.json'), {
         brandingOverlayType: BrandingOverlayType.Branding01,
       }),

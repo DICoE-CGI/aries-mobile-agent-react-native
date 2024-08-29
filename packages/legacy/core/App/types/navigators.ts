@@ -1,5 +1,5 @@
 import { CredentialExchangeRecord } from '@credo-ts/core'
-import { NavigatorScreenParams } from '@react-navigation/core'
+import { NavigatorScreenParams } from '@react-navigation/native'
 import { StackNavigationOptions } from '@react-navigation/stack'
 
 export enum Screens {
@@ -28,6 +28,7 @@ export enum Screens {
   WhatAreContacts = 'What Are Contacts',
   Chat = 'Chat',
   Connection = 'Connection',
+  MobileVerifierLoading = 'Mobile Verifier Loading',
   OnTheWay = 'On The Way',
   Declined = 'Declined',
   UseBiometry = 'Use Biometry',
@@ -41,6 +42,9 @@ export enum Screens {
   NameWallet = 'Name Wallet',
   RenameContact = 'Rename Contact',
   ScanHelp = 'Scan Help',
+  HistorySettings = 'History Settings',
+  HistoryPage = 'History',
+  HistoryDetails = 'History details',
 }
 
 export enum Stacks {
@@ -53,6 +57,7 @@ export enum Stacks {
   ProofRequestsStack = 'Proof Requests Stack',
   NotificationStack = 'Notifications Stack',
   ConnectionStack = 'Connection Stack',
+  HistoryStack = 'History Stack',
 }
 
 export enum TabStacks {
@@ -70,6 +75,7 @@ export type RootStackParams = {
   [Stacks.ContactStack]: NavigatorScreenParams<ContactStackParams>
   [Stacks.ProofRequestsStack]: NavigatorScreenParams<ProofRequestsStackParams>
   [Stacks.NotificationStack]: NavigatorScreenParams<NotificationStackParams>
+  [Stacks.HistoryStack]: NavigatorScreenParams<HistoryStackParams>
 }
 
 export type TabStackParams = {
@@ -112,6 +118,7 @@ export type ProofRequestsStackParams = {
   [Screens.ProofRequesting]: { templateId: string; predicateValues?: Record<string, Record<string, number>> }
   [Screens.ProofDetails]: { recordId: string; isHistory?: boolean; senderReview?: boolean }
   [Screens.ProofRequestDetails]: { templateId: string; connectionId?: string }
+  [Screens.MobileVerifierLoading]: { proofId: string; connectionId: string }
   [Screens.ProofRequestUsageHistory]: { templateId: string }
   [Screens.ProofChangeCredential]: {
     selectedCred: string
@@ -149,6 +156,7 @@ export type SettingStackParams = {
   [Screens.Onboarding]: undefined
   [Screens.Developer]: undefined
   [Screens.UsePushNotifications]: { isMenu?: boolean }
+  [Screens.HistorySettings]: undefined
 }
 
 export type NotificationStackParams = {
@@ -161,11 +169,17 @@ export type NotificationStackParams = {
 
 export type DeliveryStackParams = {
   [Screens.Connection]: { oobRecordId: string }
+  [Screens.MobileVerifierLoading]: { proofId: string; connectionId: string }
+  [Screens.ProofDetails]: { recordId: string }
   [Screens.CredentialOffer]: { credentialId: string }
   [Screens.ProofRequest]: { proofId: string }
   [Screens.OnTheWay]: { credentialId: string }
   [Screens.Declined]: { credentialId: string }
   [Screens.Chat]: { connectionId: string }
+}
+
+export type HistoryStackParams = {
+  [Screens.HistoryPage]: undefined
 }
 
 export type ScreenOptionsType = Partial<Record<Screens, StackNavigationOptions>>

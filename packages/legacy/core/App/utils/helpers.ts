@@ -49,6 +49,7 @@ import {
   getDescriptorMetadata,
 } from './anonCredsProofRequestMapper'
 import { parseCredDefFromId } from './cred-def'
+import { isOpenIdPresentationRequest } from './parsers'
 
 export { parsedCredDefNameFromCredential } from './cred-def'
 
@@ -705,7 +706,37 @@ export const retrieveCredentialsForProof = async (
     const hasPresentationExchange = format.request?.presentationExchange !== undefined
     const hasAnonCreds = format.request?.anoncreds !== undefined
     const hasIndy = format.request?.indy !== undefined
-    const credentials = await agent.proofs.getCredentialsForRequest({
+    const credentialsPromise = agent.proofs.getCredentialsForRequest({
+      proofRecordId: proof.id,
+      proofFormats: {
+        // FIXME: Credo will try to use the format, even if the value is undefined (but the key is present)
+        // We should ignore the key, if the value is undefined. For now this is a workaround.
+        ...(hasIndy
+          ? {
+              indy: {
+                // Setting `filterByNonRevocationRequirements` to `false` returns all
+                // credentials even if they are revokable (and revoked). We need this to
+                // be able to show why a proof cannot be satisfied. Otherwise we can only
+                // show failure.
+                filterByNonRevocationRequirements: true,
+              },
+            }
+          : {}),
+        ...(hasAnonCreds
+          ? {
+              anoncreds: {
+                // Setting `filterByNonRevocationRequirements` to `false` returns all
+                // credentials even if they are revokable (and revoked). We need this to
+                // be able to show why a proof cannot be satisfied. Otherwise we can only
+                // show failure.
+                filterByNonRevocationRequirements: true,
+              },
+            }
+          : {}),
+        ...(hasPresentationExchange ? { presentationExchange: {} } : {}),
+      },
+    })
+    const credentialsWithRevokedPromise = agent.proofs.getCredentialsForRequest({
       proofRecordId: proof.id,
       proofFormats: {
         // FIXME: Credo will try to use the format, even if the value is undefined (but the key is present)
@@ -735,6 +766,28 @@ export const retrieveCredentialsForProof = async (
         ...(hasPresentationExchange ? { presentationExchange: {} } : {}),
       },
     })
+    const [credentials, credentialsWithRevoked] = await Promise.all([credentialsPromise, credentialsWithRevokedPromise])
+
+    // in the case where there are only revoked credentials to satisfy a proof, include them for errors on the proof screen, otherwise leave them out
+    const addRevokedCredsIfNeeded = (proofFormat: 'indy' | 'anoncreds', proofItem: 'attributes' | 'predicates') => {
+      if (credentials.proofFormats[proofFormat] && credentialsWithRevoked.proofFormats[proofFormat]) {
+        Object.keys(credentials.proofFormats[proofFormat]?.[proofItem] ?? {}).forEach((key) => {
+          if (
+            credentials.proofFormats[proofFormat] &&
+            !credentials.proofFormats[proofFormat]?.[proofItem][key]?.length
+          ) {
+            credentials.proofFormats[proofFormat]?.[proofItem][key].push(
+              ...(credentialsWithRevoked.proofFormats[proofFormat]?.[proofItem][key] ?? ([] as any[]))
+            )
+          }
+        })
+      }
+    }
+    for (const proofFormat of ['indy', 'anoncreds']) {
+      for (const proofItem of ['attributes', 'predicates']) {
+        addRevokedCredsIfNeeded(proofFormat as 'indy' | 'anoncreds', proofItem as 'attributes' | 'predicates')
+      }
+    }
     if (!credentials) {
       throw new Error(t('ProofRequest.RequestedCredentialsCouldNotBeFound'))
     }
@@ -960,8 +1013,12 @@ export const connectFromScanOrDeepLink = async (
 
   // TODO:(jl) Do we care if the connection is a deep link?
   logger.info(`Attempting to connect from scan or ${isDeepLink ? 'deeplink' : 'qr scan'}`)
-
   try {
+    const isOpenIDInvitation = await isOpenIdPresentationRequest(uri)
+    if (isOpenIDInvitation) {
+      //TODO: Impliment Navigation to display credential
+      throw new Error(`OpenID4VCI is not supported yet`)
+    }
     const aUrl = processBetaUrlIfRequired(uri)
     const receivedInvitation = await connectFromInvitation(aUrl, agent, implicitInvitations, reuseConnection)
 

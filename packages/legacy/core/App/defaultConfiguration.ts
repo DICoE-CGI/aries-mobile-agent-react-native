@@ -4,7 +4,6 @@ import HomeFooterView from './components/views/HomeFooterView'
 import HomeHeaderView from './components/views/HomeHeaderView'
 import { PINRules } from './constants'
 import { ConfigurationContext } from './contexts/configuration'
-import { useNotifications } from './hooks/notifications'
 import { Locales, translationResources } from './localization'
 import Developer from './screens/Developer'
 import OnboardingPages from './screens/OnboardingPages'
@@ -29,19 +28,10 @@ export const defaultConfiguration: ConfigurationContext = {
   record: Record,
   PINSecurity: { rules: PINRules, displayHelper: false },
   settings: [],
-  customNotification: {
-    component: () => null,
-    onCloseAction: () => null,
-    title: '',
-    description: '',
-    buttonTitle: '',
-    pageTitle: '',
-  },
   enableTours: false,
   supportedLanguages: Object.keys(translationResources) as Locales[],
   showPreface: false,
   disableOnboardingSkip: false,
-  useCustomNotifications: useNotifications,
   useBiometry: UseBiometry,
   whereToUseWalletUrl: 'https://example.com',
   showScanHelp: true,

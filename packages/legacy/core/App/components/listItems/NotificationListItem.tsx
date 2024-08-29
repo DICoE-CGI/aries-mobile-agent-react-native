@@ -9,7 +9,7 @@ import {
 } from '@credo-ts/core'
 import { useAgent, useConnectionById } from '@credo-ts/react-hooks'
 import { markProofAsViewed } from '@hyperledger/aries-bifold-verifier'
-import { useNavigation } from '@react-navigation/core'
+import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
@@ -17,13 +17,13 @@ import { DeviceEventEmitter, StyleSheet, Text, TextStyle, TouchableOpacity, View
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import { EventTypes, hitSlop } from '../../constants'
-import { useConfiguration } from '../../contexts/configuration'
 import { useStore } from '../../contexts/store'
 import { useTheme } from '../../contexts/theme'
 import { BifoldError } from '../../types/error'
 import { GenericFn } from '../../types/fn'
 import { BasicMessageMetadata, basicMessageCustomMetadata } from '../../types/metadata'
 import { HomeStackParams, Screens, Stacks } from '../../types/navigators'
+import { CustomNotification } from '../../types/notification'
 import { ModalUsage } from '../../types/remove'
 import { getConnectionName, parsedSchema } from '../../utils/helpers'
 import { testIdWithKey } from '../../utils/testable'
@@ -45,6 +45,7 @@ export enum NotificationType {
 interface NotificationListItemProps {
   notificationType: NotificationType
   notification: BasicMessageRecord | CredentialExchangeRecord | ProofExchangeRecord
+  customNotification?: CustomNotification
 }
 
 type DisplayDetails = {
@@ -68,14 +69,19 @@ const markMessageAsSeen = async (agent: Agent, record: BasicMessageRecord) => {
   await basicMessageRepository.update(agent.context, record)
 }
 
-const NotificationListItem: React.FC<NotificationListItemProps> = ({ notificationType, notification }) => {
+const NotificationListItem: React.FC<NotificationListItemProps> = ({
+  notificationType,
+  notification,
+  customNotification,
+}) => {
   const navigation = useNavigation<StackNavigationProp<HomeStackParams>>()
-  const { customNotification } = useConfiguration()
   const [store, dispatch] = useStore()
   const { t } = useTranslation()
   const { ColorPallet, TextTheme } = useTheme()
   const { agent } = useAgent()
   const [declineModalVisible, setDeclineModalVisible] = useState(false)
+  const [action, setAction] = useState<any>()
+  const [closeAction, setCloseAction] = useState<any>()
   const connection = useConnectionById(notification.connectionId ?? '')
   const [details, setDetails] = useState<DisplayDetails>({
     type: InfoBoxType.Info,
@@ -132,18 +138,7 @@ const NotificationListItem: React.FC<NotificationListItemProps> = ({ notificatio
     },
   })
 
-  let onPress: GenericFn = () => {
-    return
-  }
-  let onClose: GenericFn = () => {
-    return
-  }
-
   const toggleDeclineModalVisible = () => setDeclineModalVisible(!declineModalVisible)
-
-  const isReceivedProof =
-    notificationType === NotificationType.ProofRequest &&
-    (notification as ProofExchangeRecord).state === ProofState.Done
 
   const declineProofRequest = async () => {
     try {
@@ -186,7 +181,7 @@ const NotificationListItem: React.FC<NotificationListItemProps> = ({ notificatio
   }
 
   const declineCustomNotification = async () => {
-    customNotification.onCloseAction(dispatch as any)
+    customNotification?.onCloseAction(dispatch as any)
     toggleDeclineModalVisible()
   }
 
@@ -275,9 +270,9 @@ const NotificationListItem: React.FC<NotificationListItemProps> = ({ notificatio
         case NotificationType.Custom:
           resolve({
             type: InfoBoxType.Info,
-            title: t(customNotification.title as any),
-            body: t(customNotification.description as any),
-            buttonTitle: t(customNotification.buttonTitle as any),
+            title: t(customNotification?.title as any),
+            body: t(customNotification?.description as any),
+            buttonTitle: t(customNotification?.buttonTitle as any),
           })
           break
         default:
@@ -286,7 +281,12 @@ const NotificationListItem: React.FC<NotificationListItemProps> = ({ notificatio
     })
   }
 
-  const setActionForNotificationType = (notificationType: NotificationType): void => {
+  const getActionForNotificationType = (
+    notification: BasicMessageRecord | CredentialExchangeRecord | ProofExchangeRecord,
+    notificationType: NotificationType
+  ) => {
+    let onPress
+    let onClose
     switch (notificationType) {
       case NotificationType.BasicMessage:
         onPress = () => {
@@ -307,7 +307,10 @@ const NotificationListItem: React.FC<NotificationListItemProps> = ({ notificatio
         onClose = toggleDeclineModalVisible
         break
       case NotificationType.ProofRequest:
-        if (isReceivedProof) {
+        if (
+          (notification as ProofExchangeRecord).state === ProofState.Done ||
+          (notification as ProofExchangeRecord).state === ProofState.PresentationReceived
+        ) {
           onPress = () => {
             navigation.getParent()?.navigate(Stacks.ContactStack, {
               screen: Screens.ProofDetails,
@@ -348,9 +351,14 @@ const NotificationListItem: React.FC<NotificationListItemProps> = ({ notificatio
       default:
         throw new Error('NotificationType was not set correctly.')
     }
+    return { onPress, onClose }
   }
 
-  setActionForNotificationType(notificationType)
+  useEffect(() => {
+    const { onPress, onClose } = getActionForNotificationType(notification, notificationType)
+    setAction(() => onPress)
+    setCloseAction(() => onClose)
+  }, [notification])
 
   useEffect(() => {
     const detailsPromise = async () => {
@@ -417,6 +425,10 @@ const NotificationListItem: React.FC<NotificationListItemProps> = ({ notificatio
     }
   }, [details])
 
+  const isReceivedProof =
+    notificationType === NotificationType.ProofRequest &&
+    ((notification as ProofExchangeRecord).state === ProofState.Done ||
+      (notification as ProofExchangeRecord).state === ProofState.PresentationSent)
   return (
     <View style={[styles.container, styleConfig.containerStyle]} testID={testIdWithKey('NotificationListItem')}>
       <View style={styles.headerContainer}>
@@ -437,7 +449,7 @@ const NotificationListItem: React.FC<NotificationListItemProps> = ({ notificatio
               accessibilityLabel={t('Global.Dismiss')}
               accessibilityRole={'button'}
               testID={testIdWithKey(`Dismiss${notificationType}`)}
-              onPress={onClose}
+              onPress={closeAction}
               hitSlop={hitSlop}
             >
               <Icon name={'close'} size={iconSize} color={styleConfig.iconColor} />
@@ -454,7 +466,7 @@ const NotificationListItem: React.FC<NotificationListItemProps> = ({ notificatio
           accessibilityLabel={details.buttonTitle ?? t('Global.View')}
           testID={testIdWithKey(`View${notificationType}${isReceivedProof ? 'Received' : ''}`)}
           buttonType={ButtonType.Primary}
-          onPress={onPress}
+          onPress={action}
         />
       </View>
       {commonRemoveModal()}

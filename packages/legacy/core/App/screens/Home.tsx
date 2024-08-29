@@ -7,6 +7,7 @@ import { FlatList, View, StyleSheet } from 'react-native'
 import NotificationListItem, { NotificationType } from '../components/listItems/NotificationListItem'
 import NoNewUpdates from '../components/misc/NoNewUpdates'
 import AppGuideModal from '../components/modals/AppGuideModal'
+import { TOKENS, useContainer } from '../container-api'
 import { useConfiguration } from '../contexts/configuration'
 import { DispatchAction } from '../contexts/reducers/store'
 import { useStore } from '../contexts/store'
@@ -19,12 +20,15 @@ type HomeProps = StackScreenProps<HomeStackParams, Screens.Home>
 
 const Home: React.FC<HomeProps> = () => {
   const {
-    useCustomNotifications,
     enableTours: enableToursConfig,
     homeFooterView: HomeFooterView,
     homeHeaderView: HomeHeaderView,
   } = useConfiguration()
-  const { notifications } = useCustomNotifications()
+  const container = useContainer()
+  const notificationObj = container?.resolve(TOKENS.NOTIFICATIONS)
+  const customNotification = notificationObj?.customNotificationConfig
+  const useNotifications = notificationObj?.useNotifications ?? (() => [])
+  const notifications = useNotifications()
   const { t } = useTranslation()
 
   const { ColorPallet } = useTheme()
@@ -54,8 +58,14 @@ const Home: React.FC<HomeProps> = () => {
         notificationType = NotificationType.Revocation
       }
       component = <NotificationListItem notificationType={notificationType} notification={item} />
-    } else if (item.type === 'CustomNotification') {
-      component = <NotificationListItem notificationType={NotificationType.Custom} notification={item} />
+    } else if (item.type === 'CustomNotification' && customNotification) {
+      component = (
+        <NotificationListItem
+          notificationType={NotificationType.Custom}
+          notification={item}
+          customNotification={customNotification}
+        />
+      )
     } else {
       component = <NotificationListItem notificationType={NotificationType.ProofRequest} notification={item} />
     }
@@ -118,7 +128,7 @@ const Home: React.FC<HomeProps> = () => {
         ListHeaderComponent={() => <HomeHeaderView />}
         ListFooterComponent={() => <HomeFooterView />}
         data={notifications}
-        keyExtractor={(item) => item.id}
+        keyExtractor={(_, i) => i.toString()}
         renderItem={({ item, index }) => (
           <View
             style={{

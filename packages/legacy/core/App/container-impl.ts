@@ -1,4 +1,4 @@
-import { BaseLogger } from '@credo-ts/core'
+import { BaseLogger, Agent } from '@credo-ts/core'
 import { useProofRequestTemplates } from '@hyperledger/aries-bifold-verifier'
 import { DefaultOCABundleResolver } from '@hyperledger/aries-oca/build/legacy'
 import AsyncStorage from '@react-native-async-storage/async-storage'
@@ -13,6 +13,9 @@ import { LocalStorageKeys } from './constants'
 import { TOKENS, Container, TokenMapping } from './container-api'
 import { DispatchAction, ReducerAction } from './contexts/reducers/store'
 import { defaultState } from './contexts/store'
+import { useNotifications } from './hooks/notifications'
+import { IHistoryManager } from './modules/history'
+import HistoryManager from './modules/history/context/historyManager'
 import OnboardingStack from './navigators/OnboardingStack'
 import { DefaultScreenOptionsDictionary } from './navigators/defaultStackOptions'
 import Developer from './screens/Developer'
@@ -29,6 +32,7 @@ import {
   Onboarding as StoreOnboardingState,
   Tours as ToursState,
 } from './types/state'
+
 export class MainContainer implements Container {
   public static readonly TOKENS = TOKENS
   private _container: DependencyContainer
@@ -59,6 +63,8 @@ export class MainContainer implements Container {
     this._container.registerInstance(TOKENS.UTIL_OCA_RESOLVER, new DefaultOCABundleResolver(bundle))
     this._container.registerInstance(TOKENS.UTIL_LEDGERS, defaultIndyLedgers)
     this._container.registerInstance(TOKENS.UTIL_PROOF_TEMPLATE, useProofRequestTemplates)
+    this._container.registerInstance(TOKENS.UTIL_ATTESTATION_MONITOR, { useValue: undefined })
+    this._container.registerInstance(TOKENS.NOTIFICATIONS, { useNotifications })
     this._container.registerInstance(TOKENS.CACHE_CRED_DEFS, [])
     this._container.registerInstance(TOKENS.CACHE_SCHEMAS, [])
     this._container.registerInstance(
@@ -73,6 +79,9 @@ export class MainContainer implements Container {
         }
       }
     )
+    this._container.registerInstance(TOKENS.FN_LOAD_HISTORY, (agent: Agent<any>): IHistoryManager => {
+      return new HistoryManager(agent)
+    })
     this._container.registerInstance(TOKENS.LOAD_STATE, async (dispatch: React.Dispatch<ReducerAction<unknown>>) => {
       const loadState = async <Type>(key: LocalStorageKeys, updateVal: (newVal: Type) => void) => {
         const data = await AsyncStorage.getItem(key)
@@ -117,6 +126,9 @@ export class MainContainer implements Container {
 
   public resolve<K extends keyof TokenMapping>(token: K): TokenMapping[K] {
     return this._container.resolve(token) as TokenMapping[K]
+  }
+  resolveAll<K extends keyof TokenMapping, T extends K[]>(tokens: [...T]): { [I in keyof T]: TokenMapping[T[I]] } {
+    return tokens.map(key => this.resolve(key)!) as { [I in keyof T]: TokenMapping[T[I]] }
   }
 }
 

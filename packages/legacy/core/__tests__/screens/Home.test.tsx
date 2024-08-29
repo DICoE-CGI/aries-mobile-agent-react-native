@@ -8,15 +8,12 @@ import {
   ProofRole,
   ProofState,
 } from '@credo-ts/core'
-import { useNavigation } from '@react-navigation/core'
+import { useNavigation } from '@react-navigation/native'
 import { act, fireEvent, render } from '@testing-library/react-native'
 
 import {
   useAgent,
-  useBasicMessages,
   useConnectionById,
-  useCredentialByState,
-  useProofByState,
 } from '@credo-ts/react-hooks'
 import React from 'react'
 
@@ -25,14 +22,7 @@ import { ConfigurationContext } from '../../App/contexts/configuration'
 import Home from '../../App/screens/Home'
 import { testIdWithKey } from '../../App/utils/testable'
 import configurationContext from '../contexts/configuration'
-
-jest.mock('@react-navigation/core', () => {
-  return require('../../__mocks__/custom/@react-navigation/core')
-})
-
-jest.mock('@react-navigation/native', () => {
-  return require('../../__mocks__/custom/@react-navigation/native')
-})
+import { TOKENS, useContainer } from '../../App/container-api'
 
 jest.mock('@credo-ts/react-hooks', () => ({
   ...jest.requireActual('@credo-ts/react-hooks'),
@@ -43,8 +33,13 @@ jest.mock('@credo-ts/react-hooks', () => ({
   useConnectionById: jest.fn(),
 }))
 
+jest.mock('../../App/container-api', () => ({
+  ...jest.requireActual('../../App/container-api'),
+  useContainer: jest.fn().mockReturnValue({ resolve: () => undefined })
+}))
+
 describe('displays a home screen', () => {
-  beforeEach(() => {})
+  beforeEach(() => { })
 
   test('renders correctly', () => {
     const tree = render(
@@ -117,13 +112,22 @@ describe('with a notifications module, when an issuer sends a credential offer',
 
   beforeEach(() => {
     jest.resetAllMocks()
-    // @ts-ignore
-    useBasicMessages.mockReturnValue({ records: testBasicMessages })
+    // // @ts-ignore
+    // useBasicMessages.mockReturnValue({ records: testBasicMessages })
+
+    // // @ts-ignore
+    // useProofByState.mockReturnValue(testProofRecords)
+    // // @ts-ignore
+    // useCredentialByState.mockReturnValue(testCredentialRecords)
 
     // @ts-ignore
-    useProofByState.mockReturnValue(testProofRecords)
-    // @ts-ignore
-    useCredentialByState.mockReturnValue(testCredentialRecords)
+    useContainer.mockReturnValue({
+      resolve: (a: string) => {
+        if (a === TOKENS.NOTIFICATIONS) {
+          return { useNotifications: () => [...testBasicMessages, ...testProofRecords, ...testCredentialRecords] }
+        }
+      }
+    })
 
     // @ts-ignore
     useAgent.mockReturnValue({})
@@ -147,7 +151,7 @@ describe('with a notifications module, when an issuer sends a credential offer',
 
     const flatListInstance = await findAllByTestId(testIdWithKey('NotificationListItem'))
 
-    expect(flatListInstance).toHaveLength(4)
+    expect(flatListInstance).toHaveLength(5)
   })
 
   /**
@@ -156,7 +160,7 @@ describe('with a notifications module, when an issuer sends a credential offer',
    * When the holder selects the credential offer
    * When the holder is taken to the credential offer screen/flow
    */
-  test.skip('touch notification triggers navigation correctly I', async () => {
+  test('touch notification triggers navigation correctly I', async () => {
     const navigation = useNavigation()
     const view = render(
       <ConfigurationContext.Provider value={configurationContext}>
@@ -185,7 +189,7 @@ describe('with a notifications module, when an issuer sends a credential offer',
    * When the holder selects the proof request
    * When the holder is taken to the proof request screen/flow
    */
-  test.skip('touch notification triggers navigation correctly II', async () => {
+  test('touch notification triggers navigation correctly II', async () => {
     const { findByTestId } = render(
       <ConfigurationContext.Provider value={configurationContext}>
         <Home route={{} as any} navigation={useNavigation()} />
@@ -215,7 +219,7 @@ describe('with a notifications module, when an issuer sends a credential offer',
    * When the holder selects the proof request
    * When the holder is taken to the proof request screen/flow
    */
-  test.skip('touch notification triggers navigation correctly III', async () => {
+  test('touch notification triggers navigation correctly III', async () => {
     const { findByTestId } = render(
       <ConfigurationContext.Provider value={configurationContext}>
         <Home route={{} as any} navigation={useNavigation()} />
@@ -244,22 +248,21 @@ describe('with a notifications module, when an issuer sends a credential offer',
    * When the holder taps the View message button
    * The holder is taken to the chat screen for that contact
    */
-  test.skip('touch notification triggers navigation correctly IV', async () => {
-    const { findByTestId } = render(
+  test('touch notification triggers navigation correctly IV', async () => {
+    const { findAllByTestId } = render(
       <ConfigurationContext.Provider value={configurationContext}>
         <Home route={{} as any} navigation={useNavigation()} />
       </ConfigurationContext.Provider>
     )
 
     await act(async () => {
-      const button = await findByTestId(testIdWithKey('ViewBasicMessage'))
+      const button = (await findAllByTestId(testIdWithKey('ViewBasicMessage')))[0]
       expect(button).toBeDefined()
       fireEvent(button, 'press')
     })
 
     //xxx
     const navigation = useNavigation()
-    console.log(navigation.getParent())
     expect(navigation.getParent()?.navigate).toHaveBeenCalledTimes(1)
     expect(navigation.getParent()?.navigate).toHaveBeenCalledWith('Contacts Stack', {
       screen: 'Chat',

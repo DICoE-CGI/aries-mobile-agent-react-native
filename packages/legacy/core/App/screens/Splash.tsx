@@ -4,8 +4,7 @@ import { useAgent } from '@credo-ts/react-hooks'
 import { agentDependencies } from '@credo-ts/react-native'
 import { RemoteOCABundleResolver } from '@hyperledger/aries-oca/build/legacy'
 import { GetCredentialDefinitionRequest, GetSchemaRequest } from '@hyperledger/indy-vdr-shared'
-import { useNavigation } from '@react-navigation/core'
-import { CommonActions } from '@react-navigation/native'
+import { useNavigation, CommonActions } from '@react-navigation/native'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { DeviceEventEmitter, StyleSheet } from 'react-native'
@@ -94,7 +93,7 @@ const Splash: React.FC = () => {
   const { t } = useTranslation()
   const [store, dispatch] = useStore()
   const navigation = useNavigation()
-  const { getWalletCredentials } = useAuth()
+  const { walletSecret } = useAuth()
   const { ColorPallet } = useTheme()
   const { LoadingIndicator } = useAnimatedComponents()
   const container = useContainer()
@@ -207,26 +206,26 @@ const Splash: React.FC = () => {
   }, [mounted, store.authentication.didAuthenticate, store.stateLoaded])
 
   useEffect(() => {
-    if (!mounted || !store.authentication.didAuthenticate || !store.onboarding.didConsiderBiometry) {
-      return
-    }
-
     const initAgent = async (): Promise<void> => {
       try {
-        await ocaBundleResolver.checkForUpdates?.()
-        const credentials = await getWalletCredentials()
-
-        if (!credentials?.id || !credentials.key) {
-          // Cannot find wallet id/secret
+        if (
+          !mounted ||
+          !store.authentication.didAuthenticate ||
+          !store.onboarding.didConsiderBiometry ||
+          !walletSecret?.id ||
+          !walletSecret.key
+        ) {
           return
         }
+
+        await ocaBundleResolver.checkForUpdates?.()
 
         const newAgent = new Agent({
           config: {
             label: store.preferences.walletName || 'Aries Bifold',
             walletConfig: {
-              id: credentials.id,
-              key: credentials.key,
+              id: walletSecret.id,
+              key: walletSecret.key,
             },
             logger,
             autoUpdateStorageOnStartup: true,
@@ -252,7 +251,7 @@ const Splash: React.FC = () => {
         if (!didMigrateToAskar(store.migration)) {
           newAgent.config.logger.debug('Agent not updated to Aries Askar, updating...')
 
-          await migrateToAskar(credentials.id, credentials.key, newAgent)
+          await migrateToAskar(walletSecret.id, walletSecret.key, newAgent)
 
           newAgent.config.logger.debug('Successfully finished updating agent to Aries Askar')
           // Store that we migrated to askar.
@@ -300,7 +299,7 @@ const Splash: React.FC = () => {
     }
 
     initAgent()
-  }, [mounted, store.authentication.didAuthenticate, store.onboarding.didConsiderBiometry])
+  }, [mounted, store.authentication.didAuthenticate, store.onboarding.didConsiderBiometry, walletSecret])
 
   return (
     <SafeAreaView style={styles.container}>
