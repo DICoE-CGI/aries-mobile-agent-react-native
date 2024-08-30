@@ -31,7 +31,7 @@ const mockProofModule = {
   acceptRequest: jest.fn(),
   declineRequest: jest.fn(),
   getFormatData: jest.fn(),
-  findRequestMessage: jest.fn(),
+  findRequestMessage: jest.fn().mockReturnValue(Promise.resolve(null)),
   requestProof: jest.fn(),
   update: jest.fn(),
   findAllByQuery: jest.fn().mockReturnValue(Promise.resolve([])),
@@ -73,6 +73,8 @@ const mockOobModule = {
   findById: jest.fn().mockReturnValue(Promise.resolve(null)),
   createInvitation: jest.fn(),
   toUrl: jest.fn(),
+  findByReceivedInvitationId: jest.fn().mockReturnValue(Promise.resolve(null)),
+  parseInvitation: jest.fn().mockReturnValue(Promise.resolve(null)),
 }
 const mockBasicMessageRepository = {
   update: jest.fn(),
@@ -97,7 +99,7 @@ const agent = {
 }
 
 //mocked react hooks should return singleton objects to avoid unecessary re-renderings
-const useAgent = () => agent
+const useAgent = jest.fn().mockReturnValue(agent)
 const useCredentialById = jest.fn()
 const useProofById = jest.fn()
 const useConnectionById = jest.fn()

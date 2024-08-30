@@ -16,21 +16,18 @@ import { proofRequestTourSteps } from './components/tour/ProofRequestTourSteps'
 import { Container, ContainerProvider } from './container-api'
 import { AnimatedComponentsProvider } from './contexts/animated-components'
 import { AuthProvider } from './contexts/auth'
-import { ConfigurationProvider } from './contexts/configuration'
 import { NetworkProvider } from './contexts/network'
 import { StoreProvider } from './contexts/store'
 import { ThemeProvider } from './contexts/theme'
 import { TourProvider } from './contexts/tour/tour-provider'
-import { defaultConfiguration } from './defaultConfiguration'
 import { initLanguages, initStoredLanguage, translationResources } from './localization'
 import RootStack from './navigators/RootStack'
 import { theme } from './theme'
-//import { credentialOfferTourSteps, credentialsTourSteps, proofRequestTourSteps } from './index'
 
-initLanguages(translationResources)
+const App = (system: Container): React.FC => {
+  initLanguages(translationResources)
 
-function App(sytem: Container) {
-  return () => {
+  const AppComponent = () => {
     useMemo(() => {
       initStoredLanguage().then()
     }, [])
@@ -42,36 +39,34 @@ function App(sytem: Container) {
     }, [])
 
     return (
-      <ContainerProvider value={sytem}>
+      <ContainerProvider value={system}>
         <StoreProvider>
           <AgentProvider agent={undefined}>
             <ThemeProvider value={theme}>
               <AnimatedComponentsProvider value={animatedComponents}>
-                <ConfigurationProvider value={defaultConfiguration}>
-                  <AuthProvider>
-                    <NetworkProvider>
-                      <StatusBar
-                        hidden={false}
-                        barStyle="light-content"
-                        backgroundColor={theme.ColorPallet.brand.primary}
-                        translucent={false}
-                      />
-                      <NetInfo />
-                      <ErrorModal />
-                      <TourProvider
-                        homeTourSteps={homeTourSteps}
-                        credentialsTourSteps={credentialsTourSteps}
-                        credentialOfferTourSteps={credentialOfferTourSteps}
-                        proofRequestTourSteps={proofRequestTourSteps}
-                        overlayColor={'gray'}
-                        overlayOpacity={0.7}
-                      >
-                        <RootStack />
-                      </TourProvider>
-                      <Toast topOffset={15} config={toastConfig} />
-                    </NetworkProvider>
-                  </AuthProvider>
-                </ConfigurationProvider>
+                <AuthProvider>
+                  <NetworkProvider>
+                    <StatusBar
+                      hidden={false}
+                      barStyle="light-content"
+                      backgroundColor={theme.ColorPallet.brand.primary}
+                      translucent={false}
+                    />
+                    <NetInfo />
+                    <ErrorModal />
+                    <TourProvider
+                      homeTourSteps={homeTourSteps}
+                      credentialsTourSteps={credentialsTourSteps}
+                      credentialOfferTourSteps={credentialOfferTourSteps}
+                      proofRequestTourSteps={proofRequestTourSteps}
+                      overlayColor={'gray'}
+                      overlayOpacity={0.7}
+                    >
+                      <RootStack />
+                    </TourProvider>
+                    <Toast topOffset={15} config={toastConfig} />
+                  </NetworkProvider>
+                </AuthProvider>
               </AnimatedComponentsProvider>
             </ThemeProvider>
           </AgentProvider>
@@ -79,5 +74,7 @@ function App(sytem: Container) {
       </ContainerProvider>
     )
   }
+
+  return AppComponent
 }
 export default App

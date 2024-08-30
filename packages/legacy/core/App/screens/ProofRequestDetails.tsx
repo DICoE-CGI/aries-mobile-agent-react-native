@@ -17,7 +17,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import Button, { ButtonType } from '../components/buttons/Button'
 import VerifierCredentialCard from '../components/misc/VerifierCredentialCard'
 import AlertModal from '../components/modals/AlertModal'
-import { TOKENS, useContainer } from '../container-api'
+import { TOKENS, useServices } from '../container-api'
 import { useStore } from '../contexts/store'
 import { useTheme } from '../contexts/theme'
 import { useTemplate } from '../hooks/proof-request-templates'
@@ -35,7 +35,7 @@ interface ProofRequestAttributesCardProps {
 const ProofRequestAttributesCard: React.FC<ProofRequestAttributesCardProps> = ({ data, onChangeValue }) => {
   const { ColorPallet } = useTheme()
   const { i18n } = useTranslation()
-  const bundleResolver = useContainer().resolve(TOKENS.UTIL_OCA_RESOLVER)
+  const [bundleResolver] = useServices([TOKENS.UTIL_OCA_RESOLVER])
   const [attributes, setAttributes] = useState<Field[] | undefined>(undefined)
   const [credDefId, setCredDefId] = useState<string | undefined>(undefined)
 
@@ -79,19 +79,21 @@ interface ProofRequestCardsProps {
   onChangeValue: (schema: string, label: string, name: string, value: string) => void
 }
 
-// memo'd to prevent rerendering when onChangeValue is called from child and updates parent
-const ProofRequestCards: React.FC<ProofRequestCardsProps> = memo(({ attributes = [], onChangeValue }) => {
+const ProofRequestCardsComponent: React.FC<ProofRequestCardsProps> = ({ attributes = [], onChangeValue }) => {
   return attributes.map((item) => (
     <ProofRequestAttributesCard key={item.schema} data={item} onChangeValue={onChangeValue} />
   ))
-})
+}
+
+// memo'd to prevent rerendering when onChangeValue is called from child and updates parent
+const ProofRequestCards = memo(ProofRequestCardsComponent)
 
 const ProofRequestDetails: React.FC<ProofRequestDetailsProps> = ({ route, navigation }) => {
   const { ColorPallet, TextTheme } = useTheme()
   const [store] = useStore()
   const { t } = useTranslation()
   const { i18n } = useTranslation()
-  const bundleResolver = useContainer().resolve(TOKENS.UTIL_OCA_RESOLVER)
+  const [bundleResolver] = useServices([TOKENS.UTIL_OCA_RESOLVER])
 
   const { agent } = useAgent()
   if (!agent) {
@@ -179,7 +181,7 @@ const ProofRequestDetails: React.FC<ProofRequestDetailsProps> = ({ route, naviga
     [setCustomPredicateValues, setInvalidPredicate]
   )
 
-  const useProofRequest = useCallback(async () => {
+  const activateProofRequest = useCallback(async () => {
     if (!template) {
       return
     }
@@ -226,7 +228,7 @@ const ProofRequestDetails: React.FC<ProofRequestDetailsProps> = ({ route, naviga
             accessibilityLabel={connectionId ? t('Verifier.SendThisProofRequest') : t('Verifier.UseProofRequest')}
             testID={connectionId ? testIdWithKey('SendThisProofRequest') : testIdWithKey('UseProofRequest')}
             buttonType={ButtonType.Primary}
-            onPress={() => useProofRequest()}
+            onPress={() => activateProofRequest()}
           />
         </View>
         {store.preferences.useDataRetention && (

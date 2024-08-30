@@ -2,11 +2,11 @@ import { BaseLogger } from '@credo-ts/core'
 import {
   AnonCredsProofRequestTemplatePayload,
   ProofRequestTemplate,
-  useProofRequestTemplates,
+  getProofRequestTemplates,
 } from '@hyperledger/aries-bifold-verifier'
 import axios, { AxiosError } from 'axios'
 
-import { TOKENS, useContainer } from '../container-api'
+import { TOKENS, useServices } from '../container-api'
 
 type ProofRequestTemplateFn = (useDevTemplates: boolean) => Array<ProofRequestTemplate>
 
@@ -72,12 +72,10 @@ export const useRemoteProofBundleResolver = (
   indexFileBaseUrl: string | undefined,
   log?: BaseLogger
 ): ProofBundleResolverType => {
+  const [proofRequestTemplates] = useServices([TOKENS.UTIL_PROOF_TEMPLATE])
   if (indexFileBaseUrl) {
     return new RemoteProofBundleResolver(indexFileBaseUrl, log)
   } else {
-    const container = useContainer()
-    const proofRequestTemplates = container.resolve(TOKENS.UTIL_PROOF_TEMPLATE)
-
     return new DefaultProofBundleResolver(proofRequestTemplates)
   }
 }
@@ -155,7 +153,7 @@ export class DefaultProofBundleResolver implements ProofBundleResolverType {
   private proofRequestTemplates
 
   public constructor(proofRequestTemplates: ProofRequestTemplateFn | undefined) {
-    this.proofRequestTemplates = proofRequestTemplates ?? useProofRequestTemplates
+    this.proofRequestTemplates = proofRequestTemplates ?? getProofRequestTemplates
   }
 
   public async resolve(acceptDevRestrictions: boolean): Promise<ProofRequestTemplate[]> {

@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from 'react'
+import React, { useState, forwardRef, Ref } from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { CodeField, Cursor, useClearByFocusCell } from 'react-native-confirmation-code-field'
@@ -38,46 +38,44 @@ const PINInput: React.FC<PINInputProps & React.RefAttributes<TextInput>> = forwa
     const style = StyleSheet.create({
       container: {
         flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'flex-end',
         flexWrap: 'wrap',
-        width: '100%',
         flex: 1,
         marginBottom: 24,
       },
       labelAndFieldContainer: {
         flexGrow: 1,
-        width: '80%',
       },
       codeFieldRoot: {
-        paddingRight: 5,
+        borderRadius: 5,
+        paddingHorizontal: 12,
         paddingVertical: 4,
-        width: '100%',
+        justifyContent: 'flex-start',
+        ...PINInputTheme.cell,
       },
       cell: {
         height: cellHeight,
-        flex: 1,
         paddingHorizontal: 2,
-        borderRadius: 5,
-        marginRight: 5,
         backgroundColor: PINInputTheme.cell.backgroundColor,
       },
       cellText: {
-        fontSize: 26,
-        fontWeight: '200',
+        ...TextTheme.headingThree,
         color: PINInputTheme.cellText.color,
         textAlign: 'center',
-        textAlignVertical: 'center',
         lineHeight: cellHeight,
       },
       hideIcon: {
         flexShrink: 1,
-        alignSelf: 'center',
+        marginVertical: 10,
+        paddingHorizontal: 10,
       },
     })
 
     return (
       <View style={style.container}>
-        {label && <Text style={[TextTheme.label, { marginBottom: 8 }]}>{label}</Text>}
         <View style={style.labelAndFieldContainer}>
+          {label && <Text style={[TextTheme.label, { marginBottom: 8 }]}>{label}</Text>}
           <CodeField
             {...props}
             testID={testID}
@@ -106,8 +104,7 @@ const PINInput: React.FC<PINInputProps & React.RefAttributes<TextInput>> = forwa
             }}
             autoFocus={autoFocus}
             ref={ref}
-          >         
-          </CodeField>
+          />
         </View>
         <View style={style.hideIcon}>
           <TouchableOpacity

@@ -27,7 +27,6 @@ import InfoTextBox from '../components/texts/InfoTextBox'
 import { EventTypes } from '../constants'
 import { TOKENS, useServices } from '../container-api'
 import { useAnimatedComponents } from '../contexts/animated-components'
-import { useConfiguration } from '../contexts/configuration'
 import { useNetwork } from '../contexts/network'
 import { DispatchAction } from '../contexts/reducers/store'
 import { useStore } from '../contexts/store'
@@ -61,7 +60,7 @@ const ProofRequest: React.FC<ProofRequestProps> = ({ navigation, route }) => {
   const { t } = useTranslation()
   const { assertConnectedNetwork } = useNetwork()
   const proof = useProofById(proofId)
-  const connection = proof?.connectionId ? useConnectionById(proof.connectionId) : undefined
+  const connection = useConnectionById(proof?.connectionId ?? '')
   const [pendingModalVisible, setPendingModalVisible] = useState(false)
   const [revocationOffense, setRevocationOffense] = useState(false)
   const [retrievedCredentials, setRetrievedCredentials] = useState<AnonCredsCredentialsForProofRequest>()
@@ -72,10 +71,7 @@ const ProofRequest: React.FC<ProofRequestProps> = ({ navigation, route }) => {
   const { ColorPallet, ListItems, TextTheme } = useTheme()
   const { RecordLoading } = useAnimatedComponents()
   const goalCode = useOutOfBandByConnectionId(proof?.connectionId ?? '')?.outOfBandInvitation.goalCode
-  const outOfBandInvitation = proof?.parentThreadId
-    ? useOutOfBandByReceivedInvitationId(proof?.parentThreadId)?.outOfBandInvitation
-    : undefined
-  const { enableTours: enableToursConfig } = useConfiguration()
+  const outOfBandInvitation = useOutOfBandByReceivedInvitationId(proof?.parentThreadId ?? '')?.outOfBandInvitation
   const [containsPI, setContainsPI] = useState(false)
   const [activeCreds, setActiveCreds] = useState<ProofCredentialItems[]>([])
   const [selectedCredentials, setSelectedCredentials] = useState<string[]>([])
@@ -88,7 +84,7 @@ const ProofRequest: React.FC<ProofRequestProps> = ({ navigation, route }) => {
   )
   const { start } = useTour()
   const screenIsFocused = useIsFocused()
-  const [bundleResolver, attestationMonitor] = useServices([TOKENS.UTIL_OCA_RESOLVER, TOKENS.UTIL_ATTESTATION_MONITOR])
+  const [bundleResolver, attestationMonitor, { enableTours: enableToursConfig }] = useServices([TOKENS.UTIL_OCA_RESOLVER, TOKENS.UTIL_ATTESTATION_MONITOR, TOKENS.CONFIG])
 
   const hasMatchingCredDef = useMemo(
     () => activeCreds.some((cred) => cred.credExchangeRecord !== undefined),
@@ -280,16 +276,16 @@ const ProofRequest: React.FC<ProofRequestProps> = ({ navigation, route }) => {
 
           const selectRetrievedCredentials: AnonCredsCredentialsForProofRequest | undefined = retrievedCredentials
             ? {
-                ...retrievedCredentials,
-                attributes: formatCredentials(retrievedCredentials.attributes, credList) as Record<
-                  string,
-                  AnonCredsRequestedAttributeMatch[]
-                >,
-                predicates: formatCredentials(retrievedCredentials.predicates, credList) as Record<
-                  string,
-                  AnonCredsRequestedPredicateMatch[]
-                >,
-              }
+              ...retrievedCredentials,
+              attributes: formatCredentials(retrievedCredentials.attributes, credList) as Record<
+                string,
+                AnonCredsRequestedAttributeMatch[]
+              >,
+              predicates: formatCredentials(retrievedCredentials.predicates, credList) as Record<
+                string,
+                AnonCredsRequestedPredicateMatch[]
+              >,
+            }
             : undefined
           setRetrievedCredentials(selectRetrievedCredentials)
 
@@ -658,8 +654,8 @@ const ProofRequest: React.FC<ProofRequestProps> = ({ navigation, route }) => {
                     handleAltCredChange={
                       item.altCredentials && item.altCredentials.length > 1
                         ? () => {
-                            handleAltCredChange(item.credId, item.altCredentials ?? [item.credId])
-                          }
+                          handleAltCredChange(item.credId, item.altCredentials ?? [item.credId])
+                        }
                         : undefined
                     }
                     proof

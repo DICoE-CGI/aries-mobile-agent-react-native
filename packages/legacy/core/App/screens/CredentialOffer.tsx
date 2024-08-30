@@ -17,9 +17,8 @@ import CredentialCard from '../components/misc/CredentialCard'
 import CommonRemoveModal from '../components/modals/CommonRemoveModal'
 import Record from '../components/record/Record'
 import { EventTypes } from '../constants'
-import { TOKENS, useContainer } from '../container-api'
+import { TOKENS, useServices } from '../container-api'
 import { useAnimatedComponents } from '../contexts/animated-components'
-import { useConfiguration } from '../contexts/configuration'
 import { useNetwork } from '../contexts/network'
 import { DispatchAction } from '../contexts/reducers/store'
 import { useStore } from '../contexts/store'
@@ -34,7 +33,7 @@ import { TourID } from '../types/tour'
 import { useAppAgent } from '../utils/agent'
 import { parseCredDefFromId } from '../utils/cred-def'
 import { getCredentialIdentifiers, isValidAnonCredsCredential } from '../utils/credential'
-import { getCredentialConnectionLabel } from '../utils/helpers'
+import { useCredentialConnectionLabel } from '../utils/helpers'
 import { buildFieldsFromAnonCredsCredential } from '../utils/oca'
 import { testIdWithKey } from '../utils/testable'
 
@@ -53,21 +52,18 @@ const CredentialOffer: React.FC<CredentialOfferProps> = ({ navigation, route }) 
   const { TextTheme, ColorPallet } = useTheme()
   const { RecordLoading } = useAnimatedComponents()
   const { assertConnectedNetwork } = useNetwork()
-  const bundleResolver = useContainer().resolve(TOKENS.UTIL_OCA_RESOLVER)
+  const [bundleResolver, { enableTours: enableToursConfig }, logger, historyManagerCurried] = useServices([TOKENS.UTIL_OCA_RESOLVER, TOKENS.CONFIG, TOKENS.UTIL_LOGGER, TOKENS.FN_LOAD_HISTORY])
   const [loading, setLoading] = useState<boolean>(true)
   const [buttonsVisible, setButtonsVisible] = useState(true)
   const [acceptModalVisible, setAcceptModalVisible] = useState(false)
   const [declineModalVisible, setDeclineModalVisible] = useState(false)
   const [overlay, setOverlay] = useState<CredentialOverlay<BrandingOverlay>>({ presentationFields: [] })
   const credential = useCredentialById(credentialId)
-  const credentialConnectionLabel = getCredentialConnectionLabel(credential)
+  const credentialConnectionLabel = useCredentialConnectionLabel(credential)
   const [store, dispatch] = useStore()
   const { start } = useTour()
   const screenIsFocused = useIsFocused()
   const goalCode = useOutOfBandByConnectionId(credential?.connectionId ?? '')?.outOfBandInvitation.goalCode
-  const { enableTours: enableToursConfig } = useConfiguration()
-  const container = useContainer()
-  const logger = container.resolve(TOKENS.UTIL_LOGGER)
 
   const styles = StyleSheet.create({
     headerTextContainer: {
@@ -167,7 +163,7 @@ const CredentialOffer: React.FC<CredentialOfferProps> = ({ navigation, route }) 
         )
         return
       }
-      const historyManager = container.resolve(TOKENS.FN_LOAD_HISTORY)(agent)
+      const historyManager = historyManagerCurried(agent)
 
       const type = HistoryCardType.CardAccepted
       if (!credential) {
