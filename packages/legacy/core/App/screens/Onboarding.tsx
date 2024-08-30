@@ -5,8 +5,6 @@ import { useTranslation } from 'react-i18next'
 import { Animated, BackHandler, FlatList, View, useWindowDimensions } from 'react-native'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
-import { useTheme } from '../contexts/theme'
-
 import HeaderButton, { ButtonLocation } from '../components/buttons/HeaderButton'
 import { Pagination } from '../components/misc/Pagination'
 import { DispatchAction } from '../contexts/reducers/store'
@@ -40,7 +38,6 @@ const Onboarding: React.FC<OnboardingProps> = ({
   style,
   disableSkip = false,
 }) => {
-  const { ColorPallet } = useTheme()
   const [activeIndex, setActiveIndex] = useState(0)
   const flatList: Ref<FlatList> = useRef(null)
   const scrollX = useRef(new Animated.Value(0)).current

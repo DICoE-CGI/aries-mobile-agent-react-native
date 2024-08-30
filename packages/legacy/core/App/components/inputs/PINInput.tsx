@@ -7,7 +7,6 @@ import Icon from 'react-native-vector-icons/MaterialIcons'
 import { hitSlop, minPINLength } from '../../constants'
 import { useTheme } from '../../contexts/theme'
 import { testIdWithKey } from '../../utils/testable'
-import { ImageBackgroundComponent } from 'react-native'
 
 interface PINInputProps {
   label?: string
