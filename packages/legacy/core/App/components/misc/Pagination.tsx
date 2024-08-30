@@ -1,6 +1,6 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Animated, Text, TouchableOpacity, View } from 'react-native'
+import { Animated, TouchableOpacity, View } from 'react-native'
 import { ScalingDot } from 'react-native-animated-pagination-dots'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
@@ -33,9 +33,9 @@ export const Pagination: React.FC<IPaginationProps> = ({
   scrollX,
   style,
   next,
-  nextButtonText,
+  // nextButtonText,
   previous,
-  previousButtonText,
+  // previousButtonText,
 }) => {
   const { t } = useTranslation()
 
