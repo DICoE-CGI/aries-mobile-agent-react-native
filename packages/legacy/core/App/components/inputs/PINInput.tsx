@@ -4,7 +4,7 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-nativ
 import { CodeField, Cursor, useClearByFocusCell } from 'react-native-confirmation-code-field'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
-import { hitSlop, minPINLength } from '../../constants'
+import { minPINLength } from '../../constants'
 import { useTheme } from '../../contexts/theme'
 import { testIdWithKey } from '../../utils/testable'
 
@@ -21,6 +21,7 @@ interface PINInputProps {
 const PINInput: React.FC<PINInputProps & React.RefAttributes<TextInput>> = forwardRef(
   ({ label, onPINChanged, testID, accessibilityLabel, autoFocus = false }, ref: React.Ref<TextInput>) => {
     // const accessible = accessibilityLabel && accessibilityLabel !== '' ? true : false
+    const { ColorPallet } = useTheme()
     const [PIN, setPIN] = useState('')
     const [showPIN, setShowPIN] = useState(false)
     const { t } = useTranslation()
@@ -47,27 +48,27 @@ const PINInput: React.FC<PINInputProps & React.RefAttributes<TextInput>> = forwa
       labelAndFieldContainer: {
         flexGrow: 1,
       },
-      codeFieldRoot: {
-        borderRadius: 5,
-        paddingHorizontal: 12,
-        paddingVertical: 4,
-        justifyContent: 'flex-start',
-        ...PINInputTheme.cell,
-      },
       cell: {
+        borderRadius: 5,
         height: cellHeight,
-        paddingHorizontal: 2,
+        width: 40,
+        paddingHorizontal: 10,
         backgroundColor: PINInputTheme.cell.backgroundColor,
       },
       cellText: {
         ...TextTheme.headingThree,
         color: PINInputTheme.cellText.color,
         textAlign: 'center',
-        lineHeight: cellHeight,
+        textAlignVertical: 'center',
+      },
+      focusedCell: {
+        borderWidth: 2,
+        borderColor: ColorPallet.grayscale.mediumGrey,
       },
       hideIcon: {
         flexShrink: 1,
         marginVertical: 10,
+        marginLeft: 10,
         paddingHorizontal: 10,
       },
     })
@@ -82,7 +83,6 @@ const PINInput: React.FC<PINInputProps & React.RefAttributes<TextInput>> = forwa
             accessibilityLabel={accessibilityLabel}
             accessible
             value={PIN}
-            rootStyle={style.codeFieldRoot}
             onChangeText={onChangeText}
             cellCount={minPINLength}
             keyboardType="numeric"
@@ -91,11 +91,9 @@ const PINInput: React.FC<PINInputProps & React.RefAttributes<TextInput>> = forwa
               let child: React.ReactNode | string = ''
               if (symbol) {
                 child = showPIN ? symbol : '●'
-              } else if (isFocused) {
-                child = <Cursor />
               }
               return (
-                <View key={index} style={style.cell} onLayout={getCellOnLayoutHandler(index)}>
+                <View key={index} style={[style.cell, isFocused && style.focusedCell]} onLayout={getCellOnLayoutHandler(index)}>
                   <Text style={style.cellText} maxFontSizeMultiplier={1}>
                     {child}
                   </Text>
@@ -112,7 +110,7 @@ const PINInput: React.FC<PINInputProps & React.RefAttributes<TextInput>> = forwa
             accessibilityRole={'button'}
             testID={showPIN ? testIdWithKey('Hide') : testIdWithKey('Show')}
             onPress={() => setShowPIN(!showPIN)}
-            hitSlop={hitSlop}
+            // hitSlop={hitSlop}
           >
             <Icon color={PINInputTheme.icon.color} name={showPIN ? 'visibility-off' : 'visibility'} size={30}></Icon>
           </TouchableOpacity>
