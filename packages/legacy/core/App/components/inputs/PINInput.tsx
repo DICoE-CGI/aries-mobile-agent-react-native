@@ -4,7 +4,7 @@ import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-nativ
 import { CodeField, Cursor, useClearByFocusCell } from 'react-native-confirmation-code-field'
 import Icon from 'react-native-vector-icons/MaterialIcons'
 
-import { hitSlop, minPINLength } from '../../constants'
+import { minPINLength } from '../../constants'
 import { useTheme } from '../../contexts/theme'
 import { testIdWithKey } from '../../utils/testable'
 
@@ -16,21 +16,25 @@ interface PINInputProps {
   autoFocus?: boolean
 }
 
-const PINInputComponent = ({ label, onPINChanged, testID, accessibilityLabel, autoFocus = false }: PINInputProps, ref: Ref<TextInput>) => {
-  // const accessible = accessibilityLabel && accessibilityLabel !== '' ? true : false
-  const [PIN, setPIN] = useState('')
-  const [showPIN, setShowPIN] = useState(false)
-  const { t } = useTranslation()
-  const { TextTheme, PINInputTheme } = useTheme()
-  const cellHeight = 48
-  const onChangeText = (value: string) => {
-    onPINChanged && onPINChanged(value)
-    setPIN(value)
-  }
-  const [props, getCellOnLayoutHandler] = useClearByFocusCell({
-    value: PIN,
-    setValue: onChangeText,
-  })
+// TODO:(jl) Would be great if someone can figure out the proper type for
+// ref below.
+const PINInput: React.FC<PINInputProps & React.RefAttributes<TextInput>> = forwardRef(
+  ({ label, onPINChanged, testID, accessibilityLabel, autoFocus = false }, ref: React.Ref<TextInput>) => {
+    // const accessible = accessibilityLabel && accessibilityLabel !== '' ? true : false
+    const { ColorPallet } = useTheme()
+    const [PIN, setPIN] = useState('')
+    const [showPIN, setShowPIN] = useState(false)
+    const { t } = useTranslation()
+    const { TextTheme, PINInputTheme } = useTheme()
+    const cellHeight = 48
+    const onChangeText = (value: string) => {
+      onPINChanged && onPINChanged(value)
+      setPIN(value)
+    }
+    const [props, getCellOnLayoutHandler] = useClearByFocusCell({
+      value: PIN,
+      setValue: onChangeText,
+    })
 
     const style = StyleSheet.create({
       container: {
@@ -44,17 +48,11 @@ const PINInputComponent = ({ label, onPINChanged, testID, accessibilityLabel, au
         flexGrow: 1,
         width: '80%',
       },
-      codeFieldRoot: {
-        paddingRight: 5,
-        paddingVertical: 4,
-        width: '100%',
-      },
       cell: {
-        height: cellHeight,
-        flex: 1,
-        paddingHorizontal: 2,
         borderRadius: 5,
-        marginRight: 5,
+        height: cellHeight,
+        width: 40,
+        paddingHorizontal: 10,
         backgroundColor: PINInputTheme.cell.backgroundColor,
       },
       cellText: {
@@ -63,11 +61,16 @@ const PINInputComponent = ({ label, onPINChanged, testID, accessibilityLabel, au
         color: PINInputTheme.cellText.color,
         textAlign: 'center',
         textAlignVertical: 'center',
-        lineHeight: cellHeight,
+      },
+      focusedCell: {
+        borderWidth: 2,
+        borderColor: ColorPallet.grayscale.mediumGrey,
       },
       hideIcon: {
         flexShrink: 1,
-        alignSelf: 'center',
+        marginVertical: 10,
+        marginLeft: 10,
+        paddingHorizontal: 10,
       },
     })
 
@@ -81,7 +84,6 @@ const PINInputComponent = ({ label, onPINChanged, testID, accessibilityLabel, au
             accessibilityLabel={accessibilityLabel}
             accessible
             value={PIN}
-            rootStyle={style.codeFieldRoot}
             onChangeText={onChangeText}
             cellCount={minPINLength}
             keyboardType="numeric"
@@ -90,11 +92,9 @@ const PINInputComponent = ({ label, onPINChanged, testID, accessibilityLabel, au
               let child: React.ReactNode | string = ''
               if (symbol) {
                 child = showPIN ? symbol : '●'
-              } else if (isFocused) {
-                child = <Cursor />
               }
               return (
-                <View key={index} style={style.cell} onLayout={getCellOnLayoutHandler(index)}>
+                <View key={index} style={[style.cell, isFocused && style.focusedCell]} onLayout={getCellOnLayoutHandler(index)}>
                   <Text style={style.cellText} maxFontSizeMultiplier={1}>
                     {child}
                   </Text>
@@ -112,7 +112,7 @@ const PINInputComponent = ({ label, onPINChanged, testID, accessibilityLabel, au
             accessibilityRole={'button'}
             testID={showPIN ? testIdWithKey('Hide') : testIdWithKey('Show')}
             onPress={() => setShowPIN(!showPIN)}
-            hitSlop={hitSlop}
+            // hitSlop={hitSlop}
           >
             <Icon color={PINInputTheme.icon.color} name={showPIN ? 'visibility-off' : 'visibility'} size={30}></Icon>
           </TouchableOpacity>
