@@ -41,6 +41,7 @@ export default [
     rules: {
       ...reactPlugin.configs.flat.recommended.rules,
       'react/react-in-jsx-scope': 'off',
+      'react/prop-types': 'off',
     },
   },
   {
@@ -60,6 +61,7 @@ export default [
       'packages/remote-logs/build/',
       'packages/react-native-attestation/build/',
       'packages/legacy/core/lib/',
+      'packages/legacy/core/__tests__'
     ],
   },
   {
