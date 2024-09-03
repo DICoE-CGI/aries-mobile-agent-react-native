@@ -8,6 +8,7 @@ import { testIdWithKey } from '../../utils/testable'
 const LoadingIndicator: React.FC = () => {
   const { ColorPallet, Assets } = useTheme()
   const rotationAnim = useRef(new Animated.Value(0)).current
+  const scalingAnim = useRef(new Animated.Value(0)).current
   const timing: Animated.TimingAnimationConfig = {
     toValue: 1,
     duration: 2000,
@@ -17,6 +18,10 @@ const LoadingIndicator: React.FC = () => {
     inputRange: [0, 1],
     outputRange: ['0deg', '360deg'],
   })
+  const scaling = scalingAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: ['0', '1'],
+  })
   const style = StyleSheet.create({
     animation: {
       position: 'absolute',
@@ -24,9 +29,13 @@ const LoadingIndicator: React.FC = () => {
   })
   const imageDisplayOptions = {
     fill: ColorPallet.notification.infoText,
-    height: 200,
-    width: 200,
+    height: scaling,
+    width: scaling,
   }
+
+  useEffect(() => {
+    Animated.timing(scalingAnim, timing).start()
+  }, [])
 
   useEffect(() => {
     Animated.loop(Animated.timing(rotationAnim, timing)).start()
