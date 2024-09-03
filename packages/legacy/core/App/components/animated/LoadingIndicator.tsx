@@ -8,7 +8,6 @@ import { testIdWithKey } from '../../utils/testable'
 const LoadingIndicator: React.FC = () => {
   const { ColorPallet, Assets } = useTheme()
   const rotationAnim = useRef(new Animated.Value(0)).current
-  const scalingAnim = useRef(new Animated.Value(0)).current
   const timing: Animated.TimingAnimationConfig = {
     toValue: 1,
     duration: 2000,
@@ -18,10 +17,6 @@ const LoadingIndicator: React.FC = () => {
     inputRange: [0, 1],
     outputRange: ['0deg', '360deg'],
   })
-  const scaling = scalingAnim.interpolate({
-    inputRange: [0, 1],
-    outputRange: ['0', '1'],
-  })
   const style = StyleSheet.create({
     animation: {
       position: 'absolute',
@@ -29,13 +24,9 @@ const LoadingIndicator: React.FC = () => {
   })
   const imageDisplayOptions = {
     fill: ColorPallet.notification.infoText,
-    height: scaling,
-    width: scaling,
+    width: 200,
+    height: 200,
   }
-
-  useEffect(() => {
-    Animated.timing(scalingAnim, timing).start()
-  }, [])
 
   useEffect(() => {
     Animated.loop(Animated.timing(rotationAnim, timing)).start()
@@ -48,7 +39,7 @@ const LoadingIndicator: React.FC = () => {
         style={{ width: Assets.img.logoPrimary.width, height: Assets.img.logoPrimary.height }}
         testID={testIdWithKey('LoadingActivityIndicatorImage')}
       />
-      <Animated.View style={[style.animation, { transform: [{ rotate: rotation }] }]}>
+      <Animated.View key={1} style={[style.animation, { transform: [{ rotate: rotation }] }]}>
         <ActivityIndicator {...imageDisplayOptions} />
       </Animated.View>
     </View>
