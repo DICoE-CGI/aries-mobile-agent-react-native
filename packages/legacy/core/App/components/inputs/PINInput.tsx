@@ -121,4 +121,6 @@ const PINInput: React.FC<PINInputProps & React.RefAttributes<TextInput>> = forwa
   }
 )
 
+PINInput.displayName = "PINInput"
+
 export default PINInput
