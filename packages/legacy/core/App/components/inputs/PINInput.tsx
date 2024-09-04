@@ -54,13 +54,13 @@ const PINInput: React.FC<PINInputProps & React.RefAttributes<TextInput>> = forwa
         width: 40,
         paddingHorizontal: 10,
         backgroundColor: PINInputTheme.cell.backgroundColor,
+        justifyContent: 'center',
       },
       cellText: {
         fontSize: 26,
         fontWeight: '200',
         color: PINInputTheme.cellText.color,
         textAlign: 'center',
-        textAlignVertical: 'center',
       },
       focusedCell: {
         borderWidth: 2,
@@ -117,22 +117,8 @@ const PINInput: React.FC<PINInputProps & React.RefAttributes<TextInput>> = forwa
           </TouchableOpacity>
         </View>
       </View>
-      <View style={style.hideIcon}>
-        <TouchableOpacity
-          accessibilityLabel={showPIN ? t('PINCreate.Hide') : t('PINCreate.Show')}
-          accessibilityRole={'button'}
-          testID={showPIN ? testIdWithKey('Hide') : testIdWithKey('Show')}
-          onPress={() => setShowPIN(!showPIN)}
-          hitSlop={hitSlop}
-        >
-          <Icon color={PINInputTheme.icon.color} name={showPIN ? 'visibility-off' : 'visibility'} size={30}></Icon>
-        </TouchableOpacity>
-      </View>
-    </View>
-  )
-}
-
-const PINInput = forwardRef<TextInput, PINInputProps>(PINInputComponent)
+  )}
+)
 
 PINInput.displayName = "PINInput"
 
