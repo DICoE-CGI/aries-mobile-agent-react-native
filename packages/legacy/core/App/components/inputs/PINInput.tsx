@@ -1,4 +1,4 @@
-import React, { useState, forwardRef } from 'react'
+import React, { useState, forwardRef, Ref } from 'react'
 import { useTranslation } from 'react-i18next'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 import { CodeField, useClearByFocusCell } from 'react-native-confirmation-code-field'
@@ -16,7 +16,7 @@ interface PINInputProps {
   autoFocus?: boolean
 }
 
-// TODO:(jl) Would be great if someone can figure out the proper type for
+  // TODO:(jl) Would be great if someone can figure out the proper type for
 // ref below.
 const PINInput: React.FC<PINInputProps & React.RefAttributes<TextInput>> = forwardRef(
   ({ label, onPINChanged, testID, accessibilityLabel, autoFocus = false }, ref: React.Ref<TextInput>) => {
@@ -117,9 +117,22 @@ const PINInput: React.FC<PINInputProps & React.RefAttributes<TextInput>> = forwa
           </TouchableOpacity>
         </View>
       </View>
-    )
-  }
-)
+      <View style={style.hideIcon}>
+        <TouchableOpacity
+          accessibilityLabel={showPIN ? t('PINCreate.Hide') : t('PINCreate.Show')}
+          accessibilityRole={'button'}
+          testID={showPIN ? testIdWithKey('Hide') : testIdWithKey('Show')}
+          onPress={() => setShowPIN(!showPIN)}
+          hitSlop={hitSlop}
+        >
+          <Icon color={PINInputTheme.icon.color} name={showPIN ? 'visibility-off' : 'visibility'} size={30}></Icon>
+        </TouchableOpacity>
+      </View>
+    </View>
+  )
+}
+
+const PINInput = forwardRef<TextInput, PINInputProps>(PINInputComponent)
 
 PINInput.displayName = "PINInput"
 
