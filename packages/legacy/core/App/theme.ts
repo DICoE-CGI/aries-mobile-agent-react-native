@@ -316,27 +316,27 @@ export const TextTheme: ITextTheme = {
   modalNormal: {
     fontSize: 18,
     fontFamily: 'Raleway-Light',
-    color: ColorPallet.grayscale.white,
+    color: ColorPallet.grayscale.darkGrey,
   },
   modalTitle: {
     fontSize: 24,
     fontFamily: 'Raleway-Regular',
-    color: ColorPallet.grayscale.white,
+    color: ColorPallet.grayscale.darkGrey,
   },
   modalHeadingOne: {
     fontSize: 38,
     fontFamily: 'Raleway-Regular',
-    color: ColorPallet.grayscale.white,
+    color: ColorPallet.grayscale.darkGrey,
   },
   modalHeadingThree: {
     fontSize: 26,
     fontFamily: 'Raleway-Regular',
-    color: ColorPallet.grayscale.white,
+    color: ColorPallet.grayscale.darkGrey,
   },
   popupModalText: {
     fontSize: 18,
     fontFamily: 'Raleway-Light',
-    color: ColorPallet.grayscale.white,
+    color: ColorPallet.grayscale.darkGrey,
   },
   settingsText: {
     fontSize: 21,
@@ -439,6 +439,7 @@ export const Buttons = StyleSheet.create({
   },
   modalPrimaryText: {
     ...TextTheme.bold,
+    color: ColorPallet.grayscale.white,
     textAlign: 'center',
   },
   modalSecondary: {
@@ -655,23 +656,23 @@ export const ChatTheme = {
   },
   leftBubble: {
     backgroundColor: ColorPallet.brand.secondaryBackground,
-    borderRadius: 4,
+    borderRadius: 10,
     padding: 16,
     marginLeft: 16,
   },
   rightBubble: {
     backgroundColor: ColorPallet.brand.primaryLight,
-    borderRadius: 4,
+    borderRadius: 10,
     padding: 16,
     marginRight: 16,
   },
   timeStyleLeft: {
-    color: ColorPallet.grayscale.lightGrey,
+    color: ColorPallet.grayscale.darkGrey,
     fontSize: 12,
     marginTop: 8,
   },
   timeStyleRight: {
-    color: ColorPallet.grayscale.lightGrey,
+    color: ColorPallet.grayscale.veryLightGrey,
     fontSize: 12,
     marginTop: 8,
   },
@@ -692,23 +693,23 @@ export const ChatTheme = {
     color: ColorPallet.brand.secondary,
   },
   inputToolbar: {
-    backgroundColor: ColorPallet.brand.secondary,
-    shadowColor: ColorPallet.brand.primaryDisabled,
-    borderRadius: 10,
+    // backgroundColor: ColorPallet.brand.primaryLight,
   },
   inputText: {
     lineHeight: undefined,
     fontWeight: '500',
     fontSize: TextTheme.normal.fontSize,
+    color: ColorPallet.grayscale.white,
   },
-  placeholderText: ColorPallet.grayscale.lightGrey,
+  placeholderText: ColorPallet.grayscale.veryLightGrey,
   sendContainer: {
     marginBottom: 4,
     paddingHorizontal: 4,
+    marginRight: 4,
     justifyContent: 'center',
   },
   sendEnabled: ColorPallet.brand.primary,
-  sendDisabled: ColorPallet.brand.primaryDisabled,
+  sendDisabled: ColorPallet.brand.primaryLight,
   options: ColorPallet.brand.primary,
   optionsText: ColorPallet.grayscale.black,
   openButtonStyle: {
@@ -724,6 +725,7 @@ export const ChatTheme = {
     fontSize: TextTheme.normal.fontSize,
     fontWeight: 'bold',
     textAlign: 'center',
+    color: ColorPallet.grayscale.white,
   },
   documentIconContainer: {
     backgroundColor: ColorPallet.brand.primary,

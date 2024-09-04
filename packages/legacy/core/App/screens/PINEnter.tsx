@@ -339,7 +339,8 @@ const PINEnter: React.FC<PINEnterProps> = ({ setAuthenticated, usage = PINEntryU
     <KeyboardView>
       <View style={style.screenContainer}>
         <View style={style.contentContainer}>
-          <Image source={Assets.img.logoSecondary.src} style={style.image} />
+          <Assets.svg.logo style={style.image} />
+          {/* <Image source={Assets.img.logoPrimary.src} style={style.image} /> */}
           {displayHelpText()}
           <PINInput
             onPINChanged={(p: string) => {
