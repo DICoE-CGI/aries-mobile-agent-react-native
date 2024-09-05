@@ -1,7 +1,7 @@
 import { useNavigation, CommonActions } from '@react-navigation/native'
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Keyboard, StyleSheet, Text, Image, View, DeviceEventEmitter } from 'react-native'
+import { Keyboard, StyleSheet, Text, View, DeviceEventEmitter } from 'react-native'
 
 import Button, { ButtonType } from '../components/buttons/Button'
 import PINInput from '../components/inputs/PINInput'
@@ -340,7 +340,6 @@ const PINEnter: React.FC<PINEnterProps> = ({ setAuthenticated, usage = PINEntryU
       <View style={style.screenContainer}>
         <View style={style.contentContainer}>
           <Assets.svg.logo style={style.image} />
-          {/* <Image source={Assets.img.logoPrimary.src} style={style.image} /> */}
           {displayHelpText()}
           <PINInput
             onPINChanged={(p: string) => {
