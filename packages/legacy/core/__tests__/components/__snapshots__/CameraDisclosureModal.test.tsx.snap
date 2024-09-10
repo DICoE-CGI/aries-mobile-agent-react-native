@@ -16,7 +16,7 @@ exports[`CameraDisclosureModal Component Renders correctly 1`] = `
   <RNCSafeAreaView
     style={
       Object {
-        "backgroundColor": "#000000",
+        "backgroundColor": "#FFFFFF",
       }
     }
   >
@@ -24,7 +24,7 @@ exports[`CameraDisclosureModal Component Renders correctly 1`] = `
       style={
         Array [
           Object {
-            "backgroundColor": "#000000",
+            "backgroundColor": "#FFFFFF",
             "height": "100%",
             "padding": 20,
           },
@@ -36,9 +36,9 @@ exports[`CameraDisclosureModal Component Renders correctly 1`] = `
           style={
             Array [
               Object {
-                "color": "#FFFFFF",
+                "color": "#313132",
+                "fontFamily": "Raleway-Regular",
                 "fontSize": 38,
-                "fontWeight": "bold",
               },
             ]
           }
@@ -50,9 +50,9 @@ exports[`CameraDisclosureModal Component Renders correctly 1`] = `
           style={
             Array [
               Object {
-                "color": "#FFFFFF",
+                "color": "#313132",
+                "fontFamily": "Raleway-Light",
                 "fontSize": 18,
-                "fontWeight": "normal",
               },
               Object {
                 "marginTop": 30,
@@ -66,9 +66,9 @@ exports[`CameraDisclosureModal Component Renders correctly 1`] = `
           style={
             Array [
               Object {
-                "color": "#FFFFFF",
+                "color": "#313132",
+                "fontFamily": "Raleway-Light",
                 "fontSize": 18,
-                "fontWeight": "normal",
               },
               Object {
                 "marginTop": 30,
@@ -84,7 +84,7 @@ exports[`CameraDisclosureModal Component Renders correctly 1`] = `
       style={
         Array [
           Object {
-            "backgroundColor": "#000000",
+            "backgroundColor": "#FFFFFF",
             "margin": 20,
             "marginTop": "auto",
           },
@@ -130,7 +130,7 @@ exports[`CameraDisclosureModal Component Renders correctly 1`] = `
           onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "backgroundColor": "#42803E",
+              "backgroundColor": "#E31937",
               "borderRadius": 4,
               "opacity": 1,
               "padding": 16,
@@ -152,8 +152,8 @@ exports[`CameraDisclosureModal Component Renders correctly 1`] = `
                 Array [
                   Object {
                     "color": "#FFFFFF",
+                    "fontFamily": "Raleway-Bold",
                     "fontSize": 18,
-                    "fontWeight": "bold",
                     "textAlign": "center",
                   },
                   false,
@@ -206,7 +206,7 @@ exports[`CameraDisclosureModal Component Renders correctly 1`] = `
           onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "borderColor": "#42803E",
+              "borderColor": "#E31937",
               "borderRadius": 4,
               "borderWidth": 2,
               "opacity": 1,
@@ -228,9 +228,9 @@ exports[`CameraDisclosureModal Component Renders correctly 1`] = `
               style={
                 Array [
                   Object {
-                    "color": "#42803E",
+                    "color": "#E31937",
+                    "fontFamily": "Raleway-Bold",
                     "fontSize": 18,
-                    "fontWeight": "bold",
                     "textAlign": "center",
                   },
                   false,

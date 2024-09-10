@@ -22,9 +22,9 @@ exports[`Link Component Renders correctly, testID exists, and is pressable 1`] =
     Array [
       Object {
         "alignSelf": "flex-start",
-        "color": "#FFFFFF",
+        "color": "#cb7ca3",
+        "fontFamily": "Raleway-Light",
         "fontSize": 18,
-        "fontWeight": "normal",
         "textDecorationLine": "underline",
       },
       Object {},

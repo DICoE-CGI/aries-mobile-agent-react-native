@@ -75,7 +75,7 @@ exports[`ImageModal component Renders correctly 1`] = `
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "backgroundColor": "#000000",
+            "backgroundColor": "#FFFFFF",
             "flexShrink": 1,
           }
         }
@@ -141,7 +141,7 @@ exports[`ImageModal component Renders correctly 1`] = `
               style={
                 Array [
                   Object {
-                    "color": "#42803E",
+                    "color": "#9e83f5",
                     "fontSize": 30,
                   },
                   undefined,

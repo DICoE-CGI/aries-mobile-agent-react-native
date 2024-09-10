@@ -9,7 +9,7 @@ exports[`ProofCancelModal Component Rerenders correctly when not visible 1`] = `
   <RNCSafeAreaView
     style={
       Object {
-        "backgroundColor": "#000000",
+        "backgroundColor": "#FFFFFF",
         "flex": 1,
       }
     }
@@ -33,9 +33,9 @@ exports[`ProofCancelModal Component Rerenders correctly when not visible 1`] = `
           <Text
             style={
               Object {
-                "color": "#FFFFFF",
+                "color": "#313132",
+                "fontFamily": "Raleway-Regular",
                 "fontSize": 24,
-                "fontWeight": "bold",
                 "marginBottom": 30,
                 "marginTop": 60,
                 "textAlign": "center",
@@ -56,9 +56,9 @@ exports[`ProofCancelModal Component Rerenders correctly when not visible 1`] = `
           <Text
             style={
               Object {
-                "color": "#FFFFFF",
+                "color": "#313132",
+                "fontFamily": "Raleway-Light",
                 "fontSize": 18,
-                "fontWeight": "normal",
                 "textAlign": "center",
               }
             }
@@ -115,7 +115,7 @@ exports[`ProofCancelModal Component Rerenders correctly when not visible 1`] = `
           onStartShouldSetResponder={[Function]}
           style={
             Object {
-              "backgroundColor": "#42803E",
+              "backgroundColor": "#E31937",
               "borderRadius": 4,
               "opacity": 1,
               "padding": 16,
@@ -137,8 +137,8 @@ exports[`ProofCancelModal Component Rerenders correctly when not visible 1`] = `
                 Array [
                   Object {
                     "color": "#FFFFFF",
+                    "fontFamily": "Raleway-Bold",
                     "fontSize": 18,
-                    "fontWeight": "bold",
                     "textAlign": "center",
                   },
                   false,

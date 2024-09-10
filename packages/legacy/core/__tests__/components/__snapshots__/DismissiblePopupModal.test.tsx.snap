@@ -74,7 +74,7 @@ exports[`DismissiblePopupModal Component Renders correctly with call to action 1
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "backgroundColor": "#313132",
+            "backgroundColor": "#555555",
             "borderColor": "#0099FF",
             "borderRadius": 5,
             "borderWidth": 1,
@@ -137,8 +137,8 @@ exports[`DismissiblePopupModal Component Renders correctly with call to action 1
                 Object {
                   "alignSelf": "flex-start",
                   "color": "#FFFFFF",
+                  "fontFamily": "Raleway-Bold",
                   "fontSize": 18,
-                  "fontWeight": "bold",
                 }
               }
               testID="com.ariesbifold:id/HeaderText"
@@ -255,8 +255,8 @@ exports[`DismissiblePopupModal Component Renders correctly with call to action 1
                   style={
                     Object {
                       "color": "#FFFFFF",
+                      "fontFamily": "Raleway-Light",
                       "fontSize": 18,
-                      "fontWeight": "normal",
                       "paddingVertical": 16,
                     }
                   }
@@ -306,7 +306,7 @@ exports[`DismissiblePopupModal Component Renders correctly with call to action 1
               onStartShouldSetResponder={[Function]}
               style={
                 Object {
-                  "backgroundColor": "#42803E",
+                  "backgroundColor": "#E31937",
                   "borderRadius": 4,
                   "opacity": 1,
                   "padding": 16,
@@ -328,8 +328,8 @@ exports[`DismissiblePopupModal Component Renders correctly with call to action 1
                     Array [
                       Object {
                         "color": "#FFFFFF",
+                        "fontFamily": "Raleway-Bold",
                         "fontSize": 18,
-                        "fontWeight": "bold",
                         "textAlign": "center",
                       },
                       false,
@@ -424,7 +424,7 @@ exports[`DismissiblePopupModal Component Renders correctly without call to actio
         onStartShouldSetResponder={[Function]}
         style={
           Object {
-            "backgroundColor": "#313132",
+            "backgroundColor": "#555555",
             "borderColor": "#0099FF",
             "borderRadius": 5,
             "borderWidth": 1,
@@ -487,8 +487,8 @@ exports[`DismissiblePopupModal Component Renders correctly without call to actio
                 Object {
                   "alignSelf": "flex-start",
                   "color": "#FFFFFF",
+                  "fontFamily": "Raleway-Bold",
                   "fontSize": 18,
-                  "fontWeight": "bold",
                 }
               }
               testID="com.ariesbifold:id/HeaderText"
@@ -605,8 +605,8 @@ exports[`DismissiblePopupModal Component Renders correctly without call to actio
                   style={
                     Object {
                       "color": "#FFFFFF",
+                      "fontFamily": "Raleway-Light",
                       "fontSize": 18,
-                      "fontWeight": "normal",
                       "paddingVertical": 16,
                     }
                   }

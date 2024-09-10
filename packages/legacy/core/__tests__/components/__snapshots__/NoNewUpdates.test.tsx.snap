@@ -4,7 +4,7 @@ exports[`NoNewUpdates Component Renders correctly 1`] = `
 <View
   style={
     Object {
-      "backgroundColor": "#313132",
+      "backgroundColor": "#555555",
       "borderColor": "#0099FF",
       "borderRadius": 5,
       "borderWidth": 1,
@@ -17,7 +17,7 @@ exports[`NoNewUpdates Component Renders correctly 1`] = `
       Object {
         "alignItems": "center",
         "flexDirection": "row",
-        "justifyContent": "space-between",
+        "justifyContent": "flex-start",
       }
     }
   >
@@ -43,8 +43,8 @@ exports[`NoNewUpdates Component Renders correctly 1`] = `
           "color": "#FFFFFF",
           "flex": 1,
           "flexWrap": "wrap",
+          "fontFamily": "Raleway-Light",
           "fontSize": 18,
-          "fontWeight": "normal",
         }
       }
       testID="com.ariesbifold:id/NoNewUpdates"

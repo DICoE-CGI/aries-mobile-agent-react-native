@@ -60,7 +60,7 @@ exports[`CheckBoxRow Component Renders correctly 1`] = `
       style={
         Array [
           Object {
-            "color": "#42803E",
+            "color": "#9e83f5",
             "fontSize": 36,
           },
           undefined,
@@ -80,10 +80,10 @@ exports[`CheckBoxRow Component Renders correctly 1`] = `
     style={
       Array [
         Object {
-          "color": "#FFFFFF",
+          "color": "#000000",
           "flexShrink": 1,
+          "fontFamily": "Raleway-Light",
           "fontSize": 18,
-          "fontWeight": "normal",
           "marginLeft": 10,
           "marginRight": 0,
         },

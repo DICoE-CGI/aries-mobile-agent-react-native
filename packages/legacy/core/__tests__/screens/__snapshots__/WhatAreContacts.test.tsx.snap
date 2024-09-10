@@ -5,7 +5,7 @@ exports[`WhatAreContacts Screen Renders correctly 1`] = `
   style={
     Object {
       "alignItems": "center",
-      "backgroundColor": "#000000",
+      "backgroundColor": "#FFFFFF",
       "flex": 1,
     }
   }
@@ -26,9 +26,9 @@ exports[`WhatAreContacts Screen Renders correctly 1`] = `
       <Text
         style={
           Object {
-            "color": "#FFFFFF",
+            "color": "#000000",
+            "fontFamily": "Raleway-Regular",
             "fontSize": 32,
-            "fontWeight": "bold",
             "marginBottom": 15,
           }
         }
@@ -38,9 +38,9 @@ exports[`WhatAreContacts Screen Renders correctly 1`] = `
       <Text
         style={
           Object {
-            "color": "#FFFFFF",
+            "color": "#000000",
+            "fontFamily": "Raleway-Light",
             "fontSize": 18,
-            "fontWeight": "normal",
           }
         }
       >
@@ -57,9 +57,9 @@ exports[`WhatAreContacts Screen Renders correctly 1`] = `
         <Text
           style={
             Object {
-              "color": "#FFFFFF",
+              "color": "#000000",
+              "fontFamily": "Raleway-Light",
               "fontSize": 18,
-              "fontWeight": "normal",
               "paddingRight": 5,
             }
           }
@@ -70,9 +70,9 @@ exports[`WhatAreContacts Screen Renders correctly 1`] = `
           style={
             Array [
               Object {
-                "color": "#FFFFFF",
+                "color": "#000000",
+                "fontFamily": "Raleway-Light",
                 "fontSize": 18,
-                "fontWeight": "normal",
               },
               Object {
                 "flexShrink": 1,
@@ -94,9 +94,9 @@ exports[`WhatAreContacts Screen Renders correctly 1`] = `
         <Text
           style={
             Object {
-              "color": "#FFFFFF",
+              "color": "#000000",
+              "fontFamily": "Raleway-Light",
               "fontSize": 18,
-              "fontWeight": "normal",
               "paddingRight": 5,
             }
           }
@@ -107,9 +107,9 @@ exports[`WhatAreContacts Screen Renders correctly 1`] = `
           style={
             Array [
               Object {
-                "color": "#FFFFFF",
+                "color": "#000000",
+                "fontFamily": "Raleway-Light",
                 "fontSize": 18,
-                "fontWeight": "normal",
               },
               Object {
                 "flexShrink": 1,
@@ -131,9 +131,9 @@ exports[`WhatAreContacts Screen Renders correctly 1`] = `
         <Text
           style={
             Object {
-              "color": "#FFFFFF",
+              "color": "#000000",
+              "fontFamily": "Raleway-Light",
               "fontSize": 18,
-              "fontWeight": "normal",
               "paddingRight": 5,
             }
           }
@@ -144,9 +144,9 @@ exports[`WhatAreContacts Screen Renders correctly 1`] = `
           style={
             Array [
               Object {
-                "color": "#FFFFFF",
+                "color": "#000000",
+                "fontFamily": "Raleway-Light",
                 "fontSize": 18,
-                "fontWeight": "normal",
               },
               Object {
                 "flexShrink": 1,
@@ -168,9 +168,9 @@ exports[`WhatAreContacts Screen Renders correctly 1`] = `
         <Text
           style={
             Object {
-              "color": "#FFFFFF",
+              "color": "#000000",
+              "fontFamily": "Raleway-Light",
               "fontSize": 18,
-              "fontWeight": "normal",
               "paddingRight": 5,
             }
           }
@@ -181,9 +181,9 @@ exports[`WhatAreContacts Screen Renders correctly 1`] = `
           style={
             Array [
               Object {
-                "color": "#FFFFFF",
+                "color": "#000000",
+                "fontFamily": "Raleway-Light",
                 "fontSize": 18,
-                "fontWeight": "normal",
               },
               Object {
                 "flexShrink": 1,
@@ -197,9 +197,9 @@ exports[`WhatAreContacts Screen Renders correctly 1`] = `
       <Text
         style={
           Object {
-            "color": "#FFFFFF",
+            "color": "#000000",
+            "fontFamily": "Raleway-Light",
             "fontSize": 18,
-            "fontWeight": "normal",
           }
         }
       >
@@ -213,9 +213,9 @@ exports[`WhatAreContacts Screen Renders correctly 1`] = `
             Array [
               Object {
                 "alignSelf": "flex-start",
-                "color": "#FFFFFF",
+                "color": "#cb7ca3",
+                "fontFamily": "Raleway-Light",
                 "fontSize": 18,
-                "fontWeight": "normal",
                 "textDecorationLine": "underline",
               },
               Object {},

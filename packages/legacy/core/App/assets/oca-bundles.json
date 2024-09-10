@@ -1,135 +1,321 @@
 {
-  "XUxBrVSALWHLeycAUhrNr9:3:CL:26293:Student Card": {
+  "4QBJGx11G3acefj1yxb7tV:2:CGI Business Card:2.0.0": {
     "capture_base": {
-      "attributes": {
-        "student_first_name": "Text",
-        "student_last_name": "Text"
-      },
+      "type": "spec/capture_base/1.0",
+      "digest": "EMIRcb9OQJyQWQQRpEFjkOLWaEmOTBK-8DlSSNWcR0Hw",
       "classification": "",
-      "digest": "xuDvIavV99IjR4ZghUZb8ohgKUVvlBzw424Fv8na7MEF",
-      "flagged_attributes": [],
-      "type": "spec/capture_base/1.0"
+      "attributes": {
+        "cgi_email": "Text",
+        "cgi_role": "Text",
+        "cgi_sbu": "Text",
+        "family_name": "Text",
+        "given_names": "Text",
+        "join_date_dateint": "DateTime",
+        "picture": "Binary"
+      },
+      "flagged_attributes": [
+        "picture",
+        "given_names",
+        "family_name",
+        "cgi_email"
+      ]
     },
     "overlays": [
       {
-        "capture_base": "EfeQBz5tyC0gett-ETgkg4pkxBwwuQoeYsT-9Nt0cNsc",
-        "type": "spec/overlays/meta/1.0",
-        "language": "en",
-        "name": "Student",
-        "credential_help_text": "http://example.com/help",
-        "credential_support_url": "http://example.com/help",
-        "description": "",
-        "issuer": "",
-        "issuer_description": "",
-        "issuer_url": ""
-      },
-      {
-        "capture_base": "EfeQBz5tyC0gett-ETgkg4pkxBwwuQoeYsT-9Nt0cNsc",
-        "type": "spec/overlays/meta/1.0",
-        "language": "fr",
-        "name": "Étudiant",
-        "credential_help_text": "http://example.com/help",
-        "credential_support_url": "http://example.com/help",
-        "description": "",
-        "issuer": "",
-        "issuer_description": "",
-        "issuer_url": ""
-      },
-      {
-        "capture_base": "EfeQBz5tyC0gett-ETgkg4pkxBwwuQoeYsT-9Nt0cNsc",
-        "type": "spec/overlays/label/1.0",
-        "language": "en",
-        "attribute_labels": {
-          "student_first_name": "First Name",
-          "student_last_name": "Last Name"
+        "capture_base": "EMIRcb9OQJyQWQQRpEFjkOLWaEmOTBK-8DlSSNWcR0Hw",
+        "digest": "EY_Oyn2KeuB4GyZ_ALVjUk_ynVU6jv9UvnmoQ3lLJvKE",
+        "type": "spec/overlays/character_encoding/1.0",
+        "default_character_encoding": "utf-8",
+        "attribute_character_encoding": {
+          "cgi_email": "utf-8",
+          "cgi_role": "utf-8",
+          "cgi_sbu": "utf-8",
+          "family_name": "utf-8",
+          "given_names": "utf-8",
+          "join_date_dateint": "utf-8",
+          "picture": "base64"
         }
       },
       {
-        "capture_base": "EfeQBz5tyC0gett-ETgkg4pkxBwwuQoeYsT-9Nt0cNsc",
+        "capture_base": "EMIRcb9OQJyQWQQRpEFjkOLWaEmOTBK-8DlSSNWcR0Hw",
+        "digest": "EraoYZzZpd_rzMKsLyuVHWVcWlw0Fr_R8w_msdeUmABs",
         "type": "spec/overlays/label/1.0",
-        "language": "fr",
-        "attribute_labels": {
-          "student_last_name": "nom de famille"
-        }
-      },
-      {
-        "capture_base": "EfeQBz5tyC0gett-ETgkg4pkxBwwuQoeYsT-9Nt0cNsc",
-        "type": "aries/overlays/branding/0.1",
         "language": "en",
-        "background_color": "#FFFFFF",
-        "header": {
-          "color": "#FFFFFF"
+        "attribute_labels": {
+          "cgi_email": "CGI Email",
+          "cgi_role": "Role at CGI",
+          "cgi_sbu": "SBU",
+          "family_name": "Family Name",
+          "given_names": "Given Names",
+          "join_date_dateint": "Start Date at CGI",
+          "picture": "Photo"
         },
-        "footer": {
-          "color": "#FFFFFF"
+        "attribute_categories": [],
+        "category_labels": {}
+      },
+      {
+        "capture_base": "EMIRcb9OQJyQWQQRpEFjkOLWaEmOTBK-8DlSSNWcR0Hw",
+        "digest": "ESPA_rWBaQNiFPOlGwP6dG3s3OlmX2U41-SPjmulnqlM",
+        "type": "spec/overlays/label/1.0",
+        "language": "fr",
+        "attribute_labels": {
+          "cgi_email": "Courriel CGI",
+          "cgi_role": "Rôle chez CGI",
+          "cgi_sbu": "UAS",
+          "family_name": "Nom de famille",
+          "given_names": "Prénoms",
+          "join_date_dateint": "Date d'affiliation",
+          "picture": "Photo"
+        },
+        "attribute_categories": [],
+        "category_labels": {}
+      },
+      {
+        "capture_base": "EMIRcb9OQJyQWQQRpEFjkOLWaEmOTBK-8DlSSNWcR0Hw",
+        "digest": "E6uUYd1jJRP-6d9M5Z8wBrE2IY-bP5oWOrhgtOl3ZDKA",
+        "type": "spec/overlays/information/1.0",
+        "language": "en",
+        "attribute_information": {
+          "cgi_email": "The official CGI email of the member",
+          "cgi_role": "The member's role and title at CGI",
+          "cgi_sbu": "The SBU the member belongs to",
+          "family_name": "The legal family name of the member",
+          "given_names": "The legal first name(s) of the member",
+          "join_date_dateint": "The date the member joined CGI (in format YYYYMMDD)",
+          "picture": "A photo of the member"
         }
+      },
+      {
+        "capture_base": "EMIRcb9OQJyQWQQRpEFjkOLWaEmOTBK-8DlSSNWcR0Hw",
+        "digest": "E5l30JtmSr0Gjs2PF38InxtVM59SQy1-B43nQoyZmycE",
+        "type": "spec/overlays/information/1.0",
+        "language": "fr",
+        "attribute_information": {
+          "cgi_email": "L'adresse de courriel de compagnie du membre",
+          "cgi_role": "Le rôle et le titre du membre chez CGI",
+          "cgi_sbu": "L'UAS du membre",
+          "family_name": "Le nom de famille légal du membre",
+          "given_names": "Le ou les prénoms légaux du membre",
+          "join_date_dateint": "La date de début du membre chez CGI (AAAAMMJJ)",
+          "picture": "Une photo du membre"
+        }
+      },
+      {
+        "capture_base": "EMIRcb9OQJyQWQQRpEFjkOLWaEmOTBK-8DlSSNWcR0Hw",
+        "digest": "ExMefLt58GFAEmB5NvQiYEHWChQDOwsQCPtWgEVzKsD8",
+        "type": "spec/overlays/format/1.0",
+        "attribute_formats": {
+          "cgi_email": "[a-zA-Z0-9_\\.\\+-]+@[a-zA-Z0-9-]+\\.[a-zA-Z0-9-\\.]+",
+          "cgi_role": "^.{0,50}$",
+          "join_date_dateint": "^(?:(?:19|20)[0-9]{2})(?:0[1-9]|1[012])(?:0[1-9]|[12][0-9]|3[01])$",
+          "picture": "image/jpg"
+        }
+      },
+      {
+        "capture_base": "EMIRcb9OQJyQWQQRpEFjkOLWaEmOTBK-8DlSSNWcR0Hw",
+        "digest": "EbTh26w7bfzXKo2HMJgAAM_sRgVCzuaLtZ_dLZcgU8Sc",
+        "type": "spec/overlays/meta/1.0",
+        "language": "en",
+        "name": "CGI Business Card",
+        "description": "Details a CGI member's professional identity and affiliation with CGI."
+      },
+      {
+        "capture_base": "EMIRcb9OQJyQWQQRpEFjkOLWaEmOTBK-8DlSSNWcR0Hw",
+        "digest": "Eq9nJZHerFXeJFveDZj4NL98lhdoAdZIvUGOZNgKkjK8",
+        "type": "spec/overlays/meta/1.0",
+        "language": "fr",
+        "name": "Carte de visite CGI",
+        "description": "Décrit l'identité professionnelle et l'affiliation d'un membre chez CGI."
+      },
+      {
+        "capture_base": "",
+        "type": "aries/overlays/branding/1.0",
+        "digest": "",
+        "logo": "https://raw.githubusercontent.com/ramyzhang/cgi-business-card-oca-branding/main/cgi-logo.jpeg",
+        "background_image_slice": "https://raw.githubusercontent.com/ramyzhang/cgi-business-card-oca-branding/main/cgi-business-card-slice.png",
+        "background_image": "https://raw.githubusercontent.com/ramyzhang/cgi-business-card-oca-branding/main/cgi-business-card-banner.png",
+        "primary_background_color": "rgb(227, 25, 55)",
+        "secondary_background_color": "rgb(249, 249, 249)",
+        "primary_attribute": "given_names",
+        "secondary_attribute": "cgi_role",
+        "issued_date_attribute": "",
+        "expiry_date_attribute": ""
       }
     ]
   },
-  "XUxBrVSALWHLeycAUhrNr9:2:student_card:1.0": {
+  "L6ASjmDDbDH7yPL1t2yFj9:2:Person:1.2": {
     "capture_base": {
       "attributes": {
-        "student_first_name": "Text",
-        "student_last_name": "Text"
+        "birthdate_dateint": "DateTime",
+        "country": "Text",
+        "expiry_date_dateint": "DateTime",
+        "family_name": "Text",
+        "given_names": "Text",
+        "locality": "Text",
+        "picture": "Binary",
+        "postal_code": "Text",
+        "region": "Text",
+        "street_address": "Text"
       },
       "classification": "",
-      "digest": "xuDvIavV99IjR4ZghUZb8ohgKUVvlBzw424Fv8na7MEF",
-      "flagged_attributes": [],
+      "digest": "EP4jXq7sdsWZUXFOdnmI2S9cKyw2SPKvuQdI_hL2lKGE",
+      "flagged_attributes": [
+        "birthdate_dateint",
+        "picture"
+      ],
       "type": "spec/capture_base/1.0"
     },
     "overlays": [
       {
-        "capture_base": "EfeQBz5tyC0gett-ETgkg4pkxBwwuQoeYsT-9Nt0cNsc",
-        "type": "spec/overlays/meta/1.0",
-        "language": "en",
-        "name": "Student",
-        "credential_help_text": "http://example.com/help",
-        "credential_support_url": "http://example.com/help",
-        "description": "",
-        "issuer": "",
-        "issuer_description": "",
-        "issuer_url": ""
-      },
-      {
-        "capture_base": "EfeQBz5tyC0gett-ETgkg4pkxBwwuQoeYsT-9Nt0cNsc",
-        "type": "spec/overlays/meta/1.0",
-        "language": "fr",
-        "name": "Étudiant",
-        "credential_help_text": "http://example.com/help",
-        "credential_support_url": "http://example.com/help",
-        "description": "",
-        "issuer": "",
-        "issuer_description": "",
-        "issuer_url": ""
-      },
-      {
-        "capture_base": "EfeQBz5tyC0gett-ETgkg4pkxBwwuQoeYsT-9Nt0cNsc",
-        "type": "spec/overlays/label/1.0",
-        "language": "en",
-        "attribute_labels": {
-          "student_first_name": "First Name",
-          "student_last_name": "Last Name"
-        }
-      },
-      {
-        "capture_base": "EfeQBz5tyC0gett-ETgkg4pkxBwwuQoeYsT-9Nt0cNsc",
-        "type": "spec/overlays/label/1.0",
-        "language": "fr",
-        "attribute_labels": {
-          "student_last_name": "nom de famille"
-        }
-      },
-      {
-        "capture_base": "EfeQBz5tyC0gett-ETgkg4pkxBwwuQoeYsT-9Nt0cNsc",
-        "type": "aries/overlays/branding/0.1",
-        "language": "en",
-        "background_color": "#FFFFFF",
-        "header": {
-          "color": "#FFFFFF"
+        "attribute_character_encoding": {
+          "birthdate_dateint": "utf-8",
+          "country": "utf-8",
+          "expiry_date_dateint": "utf-8",
+          "family_name": "utf-8",
+          "given_names": "utf-8",
+          "locality": "utf-8",
+          "picture": "base64",
+          "postal_code": "utf-8",
+          "region": "utf-8",
+          "street_address": "utf-8"
         },
-        "footer": {
-          "color": "#FFFFFF"
-        }
+        "capture_base": "EP4jXq7sdsWZUXFOdnmI2S9cKyw2SPKvuQdI_hL2lKGE",
+        "default_character_encoding": "utf-8",
+        "digest": "EkE2ookx6eyWTegnbGinrGpP34Pd9cuV_LCXWdReeapQ",
+        "type": "spec/overlays/character_encoding/1.0"
+      },
+      {
+        "attribute_categories": [],
+        "attribute_labels": {
+          "birthdate_dateint": "Date of birth",
+          "country": "Country",
+          "expiry_date_dateint": "Expiry date",
+          "family_name": "Surname",
+          "given_names": "Given names",
+          "locality": "City",
+          "picture": "Photo",
+          "postal_code": "Postal code",
+          "region": "Province",
+          "street_address": "Street address"
+        },
+        "capture_base": "EP4jXq7sdsWZUXFOdnmI2S9cKyw2SPKvuQdI_hL2lKGE",
+        "category_labels": {},
+        "digest": "ExUq-TDb2JY0HoudVDMLn2W_dbWmZlt-pbT269FrG6f4",
+        "language": "en",
+        "type": "spec/overlays/label/1.0"
+      },
+      {
+        "attribute_information": {
+          "birthdate_dateint": "Date the person was born",
+          "country": "Two letter country code",
+          "expiry_date_dateint": "Expiry date",
+          "family_name": "Legal family name or mononym(s)",
+          "given_names": "Legal first and middle name(s)",
+          "locality": "City, town, municipality, or locality",
+          "picture": "Photo on BC Services Card",
+          "postal_code": "Postal code",
+          "region": "Two letter province code",
+          "street_address": "Building number and street name"
+        },
+        "capture_base": "EP4jXq7sdsWZUXFOdnmI2S9cKyw2SPKvuQdI_hL2lKGE",
+        "digest": "EDQ4N0K0gqHu2ECv46aj4Wqrv-1cxseKVAibtd6qTUTk",
+        "language": "en",
+        "type": "spec/overlays/information/1.0"
+      },
+      {
+        "attribute_categories": [],
+        "attribute_labels": {
+          "birthdate_dateint": "Date de naissance",
+          "country": "Pays",
+          "expiry_date_dateint": "Date d'expiration",
+          "family_name": "Nom de famille",
+          "given_names": "Prénoms",
+          "locality": "Ville",
+          "picture": "Photo",
+          "postal_code": "Code postal",
+          "region": "Province",
+          "street_address": "Adresse"
+        },
+        "capture_base": "EP4jXq7sdsWZUXFOdnmI2S9cKyw2SPKvuQdI_hL2lKGE",
+        "category_labels": {},
+        "digest": "EIDYr61K8MmV5BHCTt4r__ph6llfTIxxKMEjQi_UoddY",
+        "language": "fr",
+        "type": "spec/overlays/label/1.0"
+      },
+      {
+        "attribute_information": {
+          "birthdate_dateint": "Date de naissance de la personne",
+          "country": "Code à deux lettres du pays",
+          "expiry_date_dateint": "Date d'expiration",
+          "family_name": "Nom de famille légal ou mononyme(s)",
+          "given_names": "Prénom(s) et nom(s) secondaire(s) légal(aux)",
+          "locality": "Ville, municipalité ou localité",
+          "picture": "Photo sur la BC Services Card",
+          "postal_code": "Code postal",
+          "region": "Code à deux lettres de la province",
+          "street_address": "Numéro de bâtiment et nom de la rue"
+        },
+        "capture_base": "EP4jXq7sdsWZUXFOdnmI2S9cKyw2SPKvuQdI_hL2lKGE",
+        "digest": "EcoYkcFjaWQvC3XzzCw7h-_0_VTigQjiTtzY1ttV1sSk",
+        "language": "fr",
+        "type": "spec/overlays/information/1.0"
+      },
+      {
+        "attribute_formats": {
+          "birthdate_dateint": "YYYYMMDD",
+          "expiry_date_dateint": "YYYYMMDD",
+          "picture": "image/jpeg"
+        },
+        "capture_base": "EP4jXq7sdsWZUXFOdnmI2S9cKyw2SPKvuQdI_hL2lKGE",
+        "digest": "EFiUTQXYCxg1fGGtUl5UkJOeEDwIlrfaUu7WgfUR_bPc",
+        "type": "spec/overlays/format/1.0"
+      },
+      {
+        "attribute_standards": {
+          "birthdate_dateint": "urn:iso:std:iso:1989",
+          "expiry_date_dateint": "urn:iso:std:iso:1989"
+        },
+        "capture_base": "EP4jXq7sdsWZUXFOdnmI2S9cKyw2SPKvuQdI_hL2lKGE",
+        "digest": "E6Ycnt14vl6Fq6T-CxT-VZEyk_3mcmqcsneoUjH9cgGY",
+        "type": "spec/overlays/standard/1.0"
+      },
+      {
+        "capture_base": "EP4jXq7sdsWZUXFOdnmI2S9cKyw2SPKvuQdI_hL2lKGE",
+        "credential_support_url": "https://www2.gov.bc.ca/gov/content?id=87EEAD6D19974459950AA7FF7F60AD54",
+        "description": "Une pièce d'identité créée à partir de votre BC Services Card",
+        "digest": "EjcwKIHRayKTu-L0sV80OxbY2QXZPkofpYtrBRhz4TVc",
+        "issuer": "Gouvernement de la Colombie-Britannique",
+        "issuer_description": "Service BC",
+        "issuer_url": "https://www2.gov.bc.ca/gov/content?id=87EEAD6D19974459950AA7FF7F60AD54",
+        "language": "fr",
+        "name": "Personne",
+        "type": "spec/overlays/meta/1.0",
+        "watermark": "NON-PRODUCTION (FR)"
+      },
+      {
+        "capture_base": "EP4jXq7sdsWZUXFOdnmI2S9cKyw2SPKvuQdI_hL2lKGE",
+        "credential_help_text": "Learn more",
+        "credential_support_url": "https://www2.gov.bc.ca/gov/content/governments/government-id/person-credential",
+        "description": "A credential created from your BC Services Card",
+        "digest": "E7OykmOsJspSqv80dljGSzt9BAqJYiFOGWluvPd78ym4",
+        "issuer": "Government of British Columbia",
+        "language": "en",
+        "name": "Person",
+        "type": "spec/overlays/meta/1.0",
+        "watermark": "NON-PRODUCTION"
+      },
+      {
+        "logo": "https://raw.githubusercontent.com/bcgov/aries-oca-bundles/main/OCABundles/schema/bcgov-digital-trust/person/bc-logo.jpg",
+        "background_image_slice": "",
+        "background_image": "https://raw.githubusercontent.com/bcgov/aries-oca-bundles/main/OCABundles/schema/bcgov-digital-trust/person/person-background-image.png",
+        "primary_background_color": "#003366",
+        "secondary_background_color": "",
+        "capture_base": "EP4jXq7sdsWZUXFOdnmI2S9cKyw2SPKvuQdI_hL2lKGE",
+        "digest": "EBQbQEV6qSEGDzGLj1CqT4e6yzESjPimF-Swmyltw5jU",
+        "expiry_date_attribute": "expiry_date_dateint",
+        "primary_attribute": "given_names",
+        "secondary_attribute": "family_name",
+        "type": "aries/overlays/branding/1.0"
       }
     ]
   },
