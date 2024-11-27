@@ -1,7 +1,8 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Animated, Text, TouchableOpacity, View } from 'react-native'
+import { Animated, TouchableOpacity, View } from 'react-native'
 import { ScalingDot } from 'react-native-animated-pagination-dots'
+import Icon from 'react-native-vector-icons/MaterialIcons'
 
 import { hitSlop } from '../../constants'
 import { testIdWithKey } from '../../utils/testable'
@@ -32,9 +33,9 @@ export const Pagination: React.FC<IPaginationProps> = ({
   scrollX,
   style,
   next,
-  nextButtonText,
+  // nextButtonText,
   previous,
-  previousButtonText,
+  // previousButtonText,
 }) => {
   const { t } = useTranslation()
 
@@ -69,14 +70,17 @@ export const Pagination: React.FC<IPaginationProps> = ({
         importantForAccessibility={shouldHideBack() ? 'no-hide-descendants' : 'auto'}
         hitSlop={hitSlop}
       >
-        <Text
+        <View style={[style.pagerNavigationButton, {opacity: shouldHideBack() ? 0.0 : 1.0}]}>
+          <Icon name={"chevron-left"} size={30} color="#000" />
+        </View>
+        {/* <Text
           style={[
             style.pagerNavigationButton,
             { paddingRight: 20, color: shouldHideBack() ? 'transparent' : style.pagerNavigationButton.color },
           ]}
         >
           {previousButtonText}
-        </Text>
+        </Text> */}
       </TouchableOpacity>
       <ScalingDot
         data={pages}
@@ -99,14 +103,17 @@ export const Pagination: React.FC<IPaginationProps> = ({
         importantForAccessibility={shouldHideNext() ? 'no-hide-descendants' : 'auto'}
         hitSlop={hitSlop}
       >
-        <Text
+        <View style={[style.pagerNavigationButton, {opacity: shouldHideNext() ? 0.0 : 1.0}]}>
+          <Icon name={"chevron-right"} size={30} color="#000" />
+        </View>
+        {/* <Text
           style={[
             style.pagerNavigationButton,
             { paddingLeft: 20, color: shouldHideNext() ? 'transparent' : style.pagerNavigationButton.color },
           ]}
         >
           {nextButtonText}
-        </Text>
+        </Text> */}
       </TouchableOpacity>
     </View>
   )

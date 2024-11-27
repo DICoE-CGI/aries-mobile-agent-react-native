@@ -44,10 +44,10 @@ exports[`BaseToast Component Error renders correctly 1`] = `
           "borderWidth": 2,
           "flex": 1,
           "flexDirection": "row",
-          "marginTop": 25,
+          "marginTop": 30,
         },
         Object {
-          "backgroundColor": "#313132",
+          "backgroundColor": "#555555",
           "borderColor": "#D8292F",
           "width": 675,
         },
@@ -95,12 +95,12 @@ exports[`BaseToast Component Error renders correctly 1`] = `
         style={
           Array [
             Object {
-              "color": "#FFFFFF",
+              "color": "#000000",
+              "fontFamily": "Raleway-Light",
               "fontSize": 18,
-              "fontWeight": "normal",
             },
             Object {
-              "fontWeight": "bold",
+              "fontWeight": undefined,
             },
             Object {
               "color": "#FFFFFF",
@@ -115,9 +115,9 @@ exports[`BaseToast Component Error renders correctly 1`] = `
         style={
           Array [
             Object {
-              "color": "#FFFFFF",
+              "color": "#000000",
+              "fontFamily": "Raleway-Light",
               "fontSize": 18,
-              "fontWeight": "normal",
             },
             Object {
               "marginTop": 10,
@@ -180,10 +180,10 @@ exports[`BaseToast Component Info renders correctly 1`] = `
           "borderWidth": 2,
           "flex": 1,
           "flexDirection": "row",
-          "marginTop": 25,
+          "marginTop": 30,
         },
         Object {
-          "backgroundColor": "#313132",
+          "backgroundColor": "#555555",
           "borderColor": "#0099FF",
           "width": 675,
         },
@@ -231,12 +231,12 @@ exports[`BaseToast Component Info renders correctly 1`] = `
         style={
           Array [
             Object {
-              "color": "#FFFFFF",
+              "color": "#000000",
+              "fontFamily": "Raleway-Light",
               "fontSize": 18,
-              "fontWeight": "normal",
             },
             Object {
-              "fontWeight": "bold",
+              "fontWeight": undefined,
             },
             Object {
               "color": "#FFFFFF",
@@ -251,9 +251,9 @@ exports[`BaseToast Component Info renders correctly 1`] = `
         style={
           Array [
             Object {
-              "color": "#FFFFFF",
+              "color": "#000000",
+              "fontFamily": "Raleway-Light",
               "fontSize": 18,
-              "fontWeight": "normal",
             },
             Object {
               "marginTop": 10,
@@ -316,10 +316,10 @@ exports[`BaseToast Component Success renders correctly 1`] = `
           "borderWidth": 2,
           "flex": 1,
           "flexDirection": "row",
-          "marginTop": 25,
+          "marginTop": 30,
         },
         Object {
-          "backgroundColor": "#313132",
+          "backgroundColor": "#555555",
           "borderColor": "#2E8540",
           "width": 675,
         },
@@ -367,12 +367,12 @@ exports[`BaseToast Component Success renders correctly 1`] = `
         style={
           Array [
             Object {
-              "color": "#FFFFFF",
+              "color": "#000000",
+              "fontFamily": "Raleway-Light",
               "fontSize": 18,
-              "fontWeight": "normal",
             },
             Object {
-              "fontWeight": "bold",
+              "fontWeight": undefined,
             },
             Object {
               "color": "#FFFFFF",
@@ -387,9 +387,9 @@ exports[`BaseToast Component Success renders correctly 1`] = `
         style={
           Array [
             Object {
-              "color": "#FFFFFF",
+              "color": "#000000",
+              "fontFamily": "Raleway-Light",
               "fontSize": 18,
-              "fontWeight": "normal",
             },
             Object {
               "marginTop": 10,
@@ -452,10 +452,10 @@ exports[`BaseToast Component Warn renders correctly 1`] = `
           "borderWidth": 2,
           "flex": 1,
           "flexDirection": "row",
-          "marginTop": 25,
+          "marginTop": 30,
         },
         Object {
-          "backgroundColor": "#313132",
+          "backgroundColor": "#555555",
           "borderColor": "#FCBA19",
           "width": 675,
         },
@@ -503,12 +503,12 @@ exports[`BaseToast Component Warn renders correctly 1`] = `
         style={
           Array [
             Object {
-              "color": "#FFFFFF",
+              "color": "#000000",
+              "fontFamily": "Raleway-Light",
               "fontSize": 18,
-              "fontWeight": "normal",
             },
             Object {
-              "fontWeight": "bold",
+              "fontWeight": undefined,
             },
             Object {
               "color": "#FFFFFF",
@@ -523,9 +523,9 @@ exports[`BaseToast Component Warn renders correctly 1`] = `
         style={
           Array [
             Object {
-              "color": "#FFFFFF",
+              "color": "#000000",
+              "fontFamily": "Raleway-Light",
               "fontSize": 18,
-              "fontWeight": "normal",
             },
             Object {
               "marginTop": 10,

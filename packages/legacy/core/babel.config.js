@@ -8,6 +8,13 @@ const plugins = [
     },
   ],
 ]
+const overrides = [
+  {
+    plugins: [
+      ["@babel/plugin-transform-private-methods", { "loose": true }]
+    ]
+  }
+]
 
 if (process.env['ENV'] === 'prod') {
   plugins.push('transform-remove-console')
@@ -16,4 +23,5 @@ if (process.env['ENV'] === 'prod') {
 module.exports = {
   presets,
   plugins,
+  overrides,
 }

@@ -2,7 +2,7 @@ import { useNavigation } from '@react-navigation/native'
 import { StackNavigationProp } from '@react-navigation/stack'
 import React, { useRef } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ScrollView, StyleSheet, Text, View, TouchableWithoutFeedback } from 'react-native'
+import { ScrollView, StyleSheet, Text, View, TouchableWithoutFeedback, Dimensions } from 'react-native'
 import { SvgProps } from 'react-native-svg'
 
 import CredentialList from '../assets/img/credential-list.svg'
@@ -16,6 +16,9 @@ import { OnboardingStackParams, Screens } from '../types/navigators'
 import { testIdWithKey } from '../utils/testable'
 
 import { OnboardingStyleSheet } from './Onboarding'
+import BackgroundGradient from '../components/misc/BackgroundGradient'
+
+const windowHeight = Dimensions.get('window').height;
 
 export const createCarouselStyle = (OnboardingTheme: any): OnboardingStyleSheet => {
   return StyleSheet.create({
@@ -31,7 +34,8 @@ export const createCarouselStyle = (OnboardingTheme: any): OnboardingStyleSheet 
     pagerContainer: {
       flexShrink: 1,
       flexDirection: 'row',
-      alignItems: 'center',
+      justifyContent: 'space-around',
+      width: '100%',
       marginBottom: 30,
     },
     pagerDot: {
@@ -59,10 +63,19 @@ export const createStyles = (OnboardingTheme: any) => {
   return StyleSheet.create({
     headerText: {
       ...OnboardingTheme.headerText,
+      textAlign: 'center',
+    },
+    imageContainer: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      overflow: 'hidden',
+      marginVertical: 20,
+      borderRadius: 20,
     },
     bodyText: {
       ...OnboardingTheme.bodyText,
       flexShrink: 1,
+      textAlign: 'center',
     },
     point: {
       flexDirection: 'row',
@@ -81,8 +94,8 @@ export const createStyles = (OnboardingTheme: any) => {
 const createImageDisplayOptions = (OnboardingTheme: any) => {
   return {
     ...OnboardingTheme.imageDisplayOptions,
-    height: 180,
-    width: 180,
+    height: 240,
+    width: 240,
   }
 }
 
@@ -93,16 +106,17 @@ const CustomPages = (onTutorialCompleted: GenericFn, OnboardingTheme: any) => {
   return (
     <>
       <ScrollView style={{ padding: 20 }}>
-        <View style={{ alignItems: 'center' }}>
+        <View style={[styles.imageContainer, { height: windowHeight * 0.5 }]}>
+          <BackgroundGradient>
           <SecureImage {...imageDisplayOptions} />
+          </BackgroundGradient>
         </View>
         <View style={{ marginBottom: 20 }}>
           <Text style={[styles.headerText]} testID={testIdWithKey('HeaderText')}>
-            Ornare suspendisse sed nisi lacus
+            Your data is secure
           </Text>
           <Text style={[styles.bodyText, { marginTop: 25 }]} testID={testIdWithKey('BodyText')}>
-            Enim facilisis gravida neque convallis a cras semper. Suscipit adipiscing bibendum est ultricies integer
-            quis auctor elit sed.
+            Our wallet leverages decentralized ID technology to keep your information safe.
           </Text>
         </View>
       </ScrollView>
@@ -122,14 +136,14 @@ const CustomPages = (onTutorialCompleted: GenericFn, OnboardingTheme: any) => {
 const guides: Array<{ image: React.FC<SvgProps>; title: string; body: string; devModeListener?: boolean }> = [
   {
     image: CredentialList,
-    title: 'Lorem ipsum dolor sit amet',
-    body: 'Ipsum faucibus vitae aliquet nec ullamcorper sit amet risus.',
+    title: 'Welcome to your CGI Wallet',
+    body: 'Receive, store and share your credentials securely.',
     devModeListener: true,
   },
   {
     image: ScanShare,
-    title: 'Excepteur sint occaecat ',
-    body: 'Mollis aliquam ut porttitor leo a diam sollicitudin tempor.',
+    title: 'Start by scanning a QR code',
+    body: 'Scan a QR code to receive credentials from a trusted CGI source.',
   },
 ]
 
@@ -150,8 +164,12 @@ export const createPageWith = (
   )
   return (
     <ScrollView style={{ padding: 20 }}>
-      <View style={{ alignItems: 'center' }}>{<PageImage style={imageDisplayOptions} />}</View>
-      <View style={{ marginBottom: 20 }}>
+      <View style={[styles.imageContainer, { height: windowHeight * 0.5 }]}>
+        <BackgroundGradient>
+          {<PageImage style={imageDisplayOptions} />}
+        </BackgroundGradient>
+      </View>
+      <View style={{ marginBottom: 20, height: '80%' }}>
         {devModeListener ? (
           <TouchableWithoutFeedback testID={testIdWithKey('DeveloperModeTouch')} onPress={onDevModeTouched}>
             {titleElement}

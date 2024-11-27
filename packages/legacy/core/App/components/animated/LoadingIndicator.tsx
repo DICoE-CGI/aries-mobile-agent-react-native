@@ -24,8 +24,8 @@ const LoadingIndicator: React.FC = () => {
   })
   const imageDisplayOptions = {
     fill: ColorPallet.notification.infoText,
-    height: 200,
     width: 200,
+    height: 200,
   }
 
   useEffect(() => {
@@ -39,7 +39,7 @@ const LoadingIndicator: React.FC = () => {
         style={{ width: Assets.img.logoPrimary.width, height: Assets.img.logoPrimary.height }}
         testID={testIdWithKey('LoadingActivityIndicatorImage')}
       />
-      <Animated.View style={[style.animation, { transform: [{ rotate: rotation }] }]}>
+      <Animated.View key={1} style={[style.animation, { transform: [{ rotate: rotation }] }]}>
         <ActivityIndicator {...imageDisplayOptions} />
       </Animated.View>
     </View>

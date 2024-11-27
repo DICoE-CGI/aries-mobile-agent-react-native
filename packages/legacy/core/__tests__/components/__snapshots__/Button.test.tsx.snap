@@ -33,7 +33,7 @@ exports[`Button Component Primary renders correctly 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Object {
-      "backgroundColor": "#42803E",
+      "backgroundColor": "#9e83f5",
       "borderRadius": 4,
       "opacity": 1,
       "padding": 16,
@@ -54,8 +54,8 @@ exports[`Button Component Primary renders correctly 1`] = `
         Array [
           Object {
             "color": "#FFFFFF",
+            "fontFamily": "Raleway-Bold",
             "fontSize": 18,
-            "fontWeight": "bold",
             "textAlign": "center",
           },
           false,
@@ -103,7 +103,7 @@ exports[`Button Component Secondary renders correctly 1`] = `
   onStartShouldSetResponder={[Function]}
   style={
     Object {
-      "borderColor": "#42803E",
+      "borderColor": "#9e83f5",
       "borderRadius": 4,
       "borderWidth": 2,
       "opacity": 1,
@@ -124,9 +124,9 @@ exports[`Button Component Secondary renders correctly 1`] = `
       style={
         Array [
           Object {
-            "color": "#42803E",
+            "color": "#9e83f5",
+            "fontFamily": "Raleway-Bold",
             "fontSize": 18,
-            "fontWeight": "bold",
             "textAlign": "center",
           },
           false,

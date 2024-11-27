@@ -36,7 +36,7 @@ const BaseToast: React.FC<BaseToastProps> = ({ title, body, toastType, onPress =
       flex: 1,
       alignItems: 'flex-start',
       flexDirection: 'row',
-      marginTop: 25,
+      marginTop: 30,
       borderWidth,
       borderRadius,
     },
@@ -101,9 +101,12 @@ const BaseToast: React.FC<BaseToastProps> = ({ title, body, toastType, onPress =
           <Text style={[TextTheme.normal, styles.title, { color: textColor }]} testID={testIdWithKey('ToastTitle')}>
             {title}
           </Text>
-          <Text style={[TextTheme.normal, styles.body, { color: textColor }]} testID={testIdWithKey('ToastBody')}>
-            {body}
-          </Text>
+          { body 
+            ? <Text style={[TextTheme.normal, styles.body, { color: textColor }]} testID={testIdWithKey('ToastBody')}>
+                {body}
+              </Text>
+            : null
+          }
         </View>
       </View>
     </TouchableOpacity>

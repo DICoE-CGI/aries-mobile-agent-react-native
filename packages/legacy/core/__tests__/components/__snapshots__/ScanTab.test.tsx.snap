@@ -46,7 +46,7 @@ exports[`ScanTab Renders correctly 1`] = `
     style={
       Array [
         Object {
-          "color": "#42803E",
+          "color": "#9e83f5",
           "fontSize": 30,
         },
         undefined,

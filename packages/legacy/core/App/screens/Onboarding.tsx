@@ -134,7 +134,7 @@ const Onboarding: React.FC<OnboardingProps> = ({
   )
 
   return (
-    <SafeAreaView style={style.container} edges={['left', 'right', 'bottom']}>
+    <SafeAreaView style={[style.container]} edges={['left', 'right', 'bottom']}>
       <FlatList
         ref={flatList}
         horizontal

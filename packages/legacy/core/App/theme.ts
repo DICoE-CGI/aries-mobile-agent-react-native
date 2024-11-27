@@ -115,6 +115,7 @@ export interface IBrandColors {
   icon: string
   headerText: string
   headerIcon: string
+  navigationIcon: string
   buttonText: string
   tabBarInactive: string
   unorderedList: string
@@ -188,50 +189,51 @@ const GrayscaleColors: IGrayscaleColors = {
 }
 
 const BrandColors: IBrandColors = {
-  primary: '#42803E',
-  primaryDisabled: `rgba(53, 130, 63, ${lightOpacity})`,
-  secondary: '#FFFFFFFF',
-  secondaryDisabled: `rgba(53, 130, 63, ${heavyOpacity})`,
-  primaryLight: `rgba(53, 130, 63, ${lightOpacity})`,
+  primary: '#9e83f5',
+  primaryDisabled: `rgba(191, 181, 249, ${lightOpacity})`,
+  secondary: '#5236ab',
+  secondaryDisabled: `rgba(82, 54, 171, ${heavyOpacity})`,
+  primaryLight: `rgba(82, 54, 171, ${lightOpacity})`,
   highlight: '#FCBA19',
-  primaryBackground: '#000000',
-  secondaryBackground: '#313132',
-  modalPrimary: '#42803E',
-  modalSecondary: '#FFFFFFFF',
-  modalPrimaryBackground: '#000000',
-  modalSecondaryBackground: '#313132',
-  modalIcon: GrayscaleColors.white,
-  unorderedList: GrayscaleColors.white,
-  unorderedListModal: GrayscaleColors.white,
-  link: GrayscaleColors.white,
-  text: GrayscaleColors.white,
-  icon: GrayscaleColors.white,
-  headerIcon: GrayscaleColors.white,
+  primaryBackground: '#FFFFFF',
+  secondaryBackground: '#EEEEEE',
+  modalPrimary: '#E31937',
+  modalSecondary: '#000000',
+  modalPrimaryBackground: '#FFFFFF',
+  modalSecondaryBackground: '#ebebeb',
+  modalIcon: GrayscaleColors.black,
+  unorderedList: GrayscaleColors.black,
+  unorderedListModal: GrayscaleColors.black,
+  link: '#cb7ca3',
+  text: GrayscaleColors.black,
+  icon: GrayscaleColors.black,
+  headerIcon: GrayscaleColors.black,
+  navigationIcon: GrayscaleColors.white,
   headerText: GrayscaleColors.white,
   buttonText: GrayscaleColors.white,
-  tabBarInactive: GrayscaleColors.white,
+  tabBarInactive: GrayscaleColors.mediumGrey,
 }
 
 const SemanticColors: ISemanticColors = {
   error: '#D8292F',
-  success: '#2E8540',
+  success: '#1BCF40',
   focus: '#3399FF',
 }
 
 const NotificationColors: INotificationColors = {
-  success: '#313132',
+  success: '#555555',
   successBorder: '#2E8540',
   successIcon: '#2E8540',
   successText: '#FFFFFF',
-  info: '#313132',
+  info: '#555555',
   infoBorder: '#0099FF',
   infoIcon: '#0099FF',
   infoText: '#FFFFFF',
-  warn: '#313132',
+  warn: '#555555',
   warnBorder: '#FCBA19',
   warnIcon: '#FCBA19',
   warnText: '#FFFFFF',
-  error: '#313132',
+  error: '#555555',
   errorBorder: '#D8292F',
   errorIcon: '#D8292F',
   errorText: '#FFFFFF',
@@ -248,98 +250,97 @@ export const ColorPallet: IColorPallet = {
 export const TextTheme: ITextTheme = {
   headingOne: {
     fontSize: 38,
-    fontWeight: 'bold',
+    fontFamily: 'Raleway-Regular',
     color: ColorPallet.brand.text,
   },
   headingTwo: {
     fontSize: 32,
-    fontWeight: 'bold',
+    fontFamily: 'Raleway-Regular',
     color: ColorPallet.brand.text,
   },
   headingThree: {
     fontSize: 26,
-    fontWeight: 'bold',
+    fontFamily: 'Raleway-Regular',
     color: ColorPallet.brand.text,
   },
   headingFour: {
     fontSize: 21,
-    fontWeight: 'bold',
+    fontFamily: 'Raleway-Regular',
     color: ColorPallet.brand.text,
   },
   normal: {
     fontSize: 18,
-    fontWeight: 'normal',
+    fontFamily: 'Raleway-Light',
     color: ColorPallet.brand.text,
   },
   bold: {
     fontSize: 18,
-    fontWeight: 'bold',
+    fontFamily: 'Raleway-Bold',
     color: ColorPallet.brand.text,
   },
   label: {
     fontSize: 14,
-    fontWeight: 'bold',
+    fontFamily: 'Raleway-Regular',
     color: ColorPallet.brand.text,
   },
   labelTitle: {
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: 'Raleway-Regular',
     color: ColorPallet.brand.text,
   },
   labelSubtitle: {
     fontSize: 14,
-    fontWeight: 'normal',
+    fontFamily: 'Raleway-Light',
     color: ColorPallet.brand.text,
   },
   labelText: {
     fontSize: 10,
-    fontWeight: 'normal',
-    fontStyle: 'italic',
+    fontFamily: 'Raleway-Italic',
     color: ColorPallet.brand.text,
   },
   caption: {
     fontSize: 14,
-    fontWeight: 'normal',
+    fontFamily: 'Raleway-Light',
     color: ColorPallet.brand.text,
   },
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
+    fontFamily: 'Raleway-Regular',
     color: ColorPallet.brand.text,
   },
   headerTitle: {
     fontSize: 28,
-    fontWeight: 'bold',
+    fontFamily: 'Raleway-Regular',
     color: ColorPallet.brand.headerText,
   },
   modalNormal: {
     fontSize: 18,
-    fontWeight: 'normal',
-    color: ColorPallet.grayscale.white,
+    fontFamily: 'Raleway-Light',
+    color: ColorPallet.grayscale.darkGrey,
   },
   modalTitle: {
     fontSize: 24,
-    fontWeight: 'bold',
-    color: ColorPallet.grayscale.white,
+    fontFamily: 'Raleway-Regular',
+    color: ColorPallet.grayscale.darkGrey,
   },
   modalHeadingOne: {
     fontSize: 38,
-    fontWeight: 'bold',
-    color: ColorPallet.grayscale.white,
+    fontFamily: 'Raleway-Regular',
+    color: ColorPallet.grayscale.darkGrey,
   },
   modalHeadingThree: {
     fontSize: 26,
-    fontWeight: 'bold',
-    color: ColorPallet.grayscale.white,
+    fontFamily: 'Raleway-Regular',
+    color: ColorPallet.grayscale.darkGrey,
   },
   popupModalText: {
     fontSize: 18,
-    fontWeight: 'normal',
-    color: ColorPallet.grayscale.white,
+    fontFamily: 'Raleway-Light',
+    color: ColorPallet.grayscale.darkGrey,
   },
   settingsText: {
     fontSize: 21,
-    fontWeight: 'normal',
+    fontFamily: 'Raleway-Light',
     color: ColorPallet.brand.text,
   },
 }
@@ -438,6 +439,7 @@ export const Buttons = StyleSheet.create({
   },
   modalPrimaryText: {
     ...TextTheme.bold,
+    color: ColorPallet.grayscale.white,
     textAlign: 'center',
   },
   modalSecondary: {
@@ -583,7 +585,7 @@ export const TabTheme = {
     paddingBottom: 5,
   },
   tabBarButtonIconStyle: {
-    color: ColorPallet.brand.headerIcon,
+    color: ColorPallet.brand.navigationIcon,
   },
   focusTabIconStyle: {
     height: 60,
@@ -654,23 +656,23 @@ export const ChatTheme = {
   },
   leftBubble: {
     backgroundColor: ColorPallet.brand.secondaryBackground,
-    borderRadius: 4,
+    borderRadius: 10,
     padding: 16,
     marginLeft: 16,
   },
   rightBubble: {
     backgroundColor: ColorPallet.brand.primaryLight,
-    borderRadius: 4,
+    borderRadius: 10,
     padding: 16,
     marginRight: 16,
   },
   timeStyleLeft: {
-    color: ColorPallet.grayscale.lightGrey,
+    color: ColorPallet.grayscale.darkGrey,
     fontSize: 12,
     marginTop: 8,
   },
   timeStyleRight: {
-    color: ColorPallet.grayscale.lightGrey,
+    color: ColorPallet.grayscale.veryLightGrey,
     fontSize: 12,
     marginTop: 8,
   },
@@ -691,23 +693,23 @@ export const ChatTheme = {
     color: ColorPallet.brand.secondary,
   },
   inputToolbar: {
-    backgroundColor: ColorPallet.brand.secondary,
-    shadowColor: ColorPallet.brand.primaryDisabled,
-    borderRadius: 10,
+    // backgroundColor: ColorPallet.brand.primaryLight,
   },
   inputText: {
     lineHeight: undefined,
     fontWeight: '500',
     fontSize: TextTheme.normal.fontSize,
+    color: ColorPallet.grayscale.white,
   },
-  placeholderText: ColorPallet.grayscale.lightGrey,
+  placeholderText: ColorPallet.grayscale.veryLightGrey,
   sendContainer: {
     marginBottom: 4,
     paddingHorizontal: 4,
+    marginRight: 4,
     justifyContent: 'center',
   },
   sendEnabled: ColorPallet.brand.primary,
-  sendDisabled: ColorPallet.brand.primaryDisabled,
+  sendDisabled: ColorPallet.brand.primaryLight,
   options: ColorPallet.brand.primary,
   optionsText: ColorPallet.grayscale.black,
   openButtonStyle: {
@@ -723,6 +725,7 @@ export const ChatTheme = {
     fontSize: TextTheme.normal.fontSize,
     fontWeight: 'bold',
     textAlign: 'center',
+    color: ColorPallet.grayscale.white,
   },
   documentIconContainer: {
     backgroundColor: ColorPallet.brand.primary,
@@ -747,22 +750,28 @@ export const OnboardingTheme = {
     backgroundColor: ColorPallet.brand.primaryBackground,
   },
   pagerDot: {
-    borderColor: ColorPallet.brand.primary,
+    borderColor: ColorPallet.grayscale.lightGrey,
   },
   pagerDotActive: {
-    color: ColorPallet.brand.primary,
+    color: ColorPallet.grayscale.lightGrey,
   },
   pagerDotInactive: {
-    color: ColorPallet.brand.secondary,
+    color: ColorPallet.grayscale.veryLightGrey,
   },
   pagerNavigationButton: {
-    color: ColorPallet.brand.primary,
-    fontWeight: 'bold',
-    fontSize: 18,
+    // color: ColorPallet.grayscale.mediumGrey,
+    // fontFamily: 'Raleway-Medium',
+    // fontSize: 18,
+    alignItems:'center',
+    justifyContent:'center',
+    width:50,
+    height:50,
+    backgroundColor:'#ffcdd2',
+    borderRadius:50,
   },
   headerTintColor: ColorPallet.grayscale.white,
   headerText: {
-    ...TextTheme.bold,
+    ...TextTheme.headingFour,
   },
   bodyText: {
     ...TextTheme.normal,

@@ -5,7 +5,7 @@ exports[`InfoTextBox Component Renders correctly 1`] = `
   style={
     Array [
       Object {
-        "backgroundColor": "#000000",
+        "backgroundColor": "#FFFFFF",
         "flexDirection": "row",
       },
     ]
@@ -26,10 +26,10 @@ exports[`InfoTextBox Component Renders correctly 1`] = `
     style={
       Array [
         Object {
-          "color": "#FFFFFF",
+          "color": "#000000",
           "flexShrink": 1,
+          "fontFamily": "Raleway-Light",
           "fontSize": 18,
-          "fontWeight": "normal",
         },
         Object {
           "paddingBottom": 10,

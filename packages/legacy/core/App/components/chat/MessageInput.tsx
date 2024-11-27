@@ -8,13 +8,9 @@ export const renderInputToolbar = (props: any, theme: any) => (
     containerStyle={{
       ...theme.inputToolbar,
       justifyContent: 'center',
-      shadowOffset: {
-        width: 0,
-        height: 1,
-      },
-      shadowOpacity: 0.1,
-      shadowRadius: 5,
-      elevation: 2,
+      margin: 5,
+      borderRadius: 10,
+      backgroundColor: 'rgba(82, 54, 171, 0.3)',
     }}
   />
 )
